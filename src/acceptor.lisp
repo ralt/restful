@@ -32,20 +32,10 @@
                     (gethash :children resource-hash-value)
                     resource-instance)
         (let ((method (h:request-method*)))
-          (cond ((eq method :get)
-                 (progn
-                   (load-resource resource-instance)
-                   (jonathan:to-json (view-resource resource-instance))))
-                ((eq method :post)
-                 (create-resource resource-instance
-                                  (jonathan:parse (h:raw-post-data :force-text t))))
-                ((eq method :patch)
-                 (progn
-                   (load-resource resource-instance)
-                   (patch-resource resource-instance
-                                   (jonathan:parse (h:raw-post-data :force-text t)))))
-                ((eq method :delete)
-                 (delete-resource resource-instance))
+          (cond ((eq method :get) (handle-get-resource resource-instance))
+                ((eq method :post) (handle-post-resource resource-instance))
+                ((eq method :patch) (handle-patch-resource resource-instance))
+                ((eq method :delete) (handle-delete-resource resource-instance))
                 (t (error-message
                     (setf (h:return-code*) h:+http-method-not-allowed+))))))))
 
@@ -62,3 +52,17 @@
 (defun error-message (code)
   (cond ((= code h:+http-not-found+) "Resource not found.")
         ((= code h:+http-method-not-allowed+) "Method not allowed.")))
+
+(defun handle-get-resource (resource)
+  (load-resource resource)
+  (jonathan:to-json (view-resource resource)))
+
+(defun handle-post-resource (resource)
+  (create-resource resource (jonathan:parse (h:raw-post-data :force-text t))))
+
+(defun handle-patch-resource (resource)
+  (load-resource resource)
+  (patch-resource resource (jonathan:parse (h:raw-post-data :force-text t))))
+
+(defun handle-delete-resource (resource)
+  (delete-resource resource))
