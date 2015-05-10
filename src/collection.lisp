@@ -1,7 +1,9 @@
 (in-package #:restful)
 
 
-(defclass collection () ())
+(defclass collection ()
+  ((parent :initarg :parent
+           :reader parent)))
 
 (defgeneric view-collection (collection)
   (:documentation "This function should return an object that will be

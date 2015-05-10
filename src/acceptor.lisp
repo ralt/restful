@@ -14,17 +14,26 @@
          (resource-name (find (first parts) keys :test #'string=)))
     (if resource-name
         (if (rest parts)
-            (let ((resource-instance (make-instance
-                                      (gethash :class (gethash resource-name resources))
-                                      :identifier (second parts)
-                                      :parent parent)))
-              (if (rest (rest parts))
-                  (handle-uri (rest (rest parts))
-                              (gethash :children (gethash resource-name resources))
-                              resource-instance)
-                  (jonathan:to-json (view-document resource-instance))))
-            (jonathan:to-json
-             (view-collection
-              (make-instance (gethash :collection
-                                      (gethash resource-name resources))))))
+            (handle-resource parts
+                             (gethash resource-name resources)
+                             parent)
+            (handle-collection (gethash resource-name resources)
+                               parent))
         (setf (h:return-code*) h:+http-not-found+))))
+
+(defun handle-resource (parts resource-hash-value parent)
+  (let ((resource-instance (make-instance
+                            (gethash :class resource-hash-value)
+                            :identifier (second parts)
+                            :parent parent)))
+    (if (rest (rest parts))
+        (handle-uri (rest (rest parts))
+                    (gethash :children resource-hash-value)
+                    resource-instance)
+        (jonathan:to-json (view-document resource-instance)))))
+
+(defun handle-collection (resource-hash-value parent)
+  (jonathan:to-json
+   (view-collection
+    (make-instance (gethash :collection resource-hash-value)
+                   :parent parent))))
