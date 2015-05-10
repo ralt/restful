@@ -19,7 +19,8 @@
                              parent)
             (handle-collection (gethash resource-name resources)
                                parent))
-        (setf (h:return-code*) h:+http-not-found+))))
+        (error-message
+         (setf (h:return-code*) h:+http-not-found+)))))
 
 (defun handle-resource (parts resource-hash-value parent)
   (let ((resource-instance (make-instance
@@ -37,3 +38,6 @@
    (view-collection
     (make-instance (gethash :collection resource-hash-value)
                    :parent parent))))
+
+(defun error-message (code)
+  (cond ((= code h:+http-not-found+) "Resource not found")))
