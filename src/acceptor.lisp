@@ -31,13 +31,34 @@
         (handle-uri (rest (rest parts))
                     (gethash :children resource-hash-value)
                     resource-instance)
-        (jonathan:to-json (view-document resource-instance)))))
+        (let ((method (h:request-method*)))
+          (cond ((eq method :get)
+                 (progn
+                   (load-resource resource-instance)
+                   (jonathan:to-json (view-resource resource-instance))))
+                ((eq method :post)
+                 (create-resource resource-instance
+                                  (jonathan:parse (h:raw-post-data :force-text t))))
+                ((eq method :patch)
+                 (progn
+                   (load-resource resource-instance)
+                   (patch-resource resource-instance
+                                   (jonathan:parse (h:raw-post-data :force-text t)))))
+                ((eq method :delete)
+                 (delete-resource resource-instance))
+                (t (error-message
+                    (setf (h:return-code*) h:+http-method-not-allowed+))))))))
 
 (defun handle-collection (resource-hash-value parent)
-  (jonathan:to-json
-   (view-collection
-    (make-instance (gethash :collection resource-hash-value)
-                   :parent parent))))
+  (let ((method (h:request-method*)))
+    (cond ((eq method :get)
+           (jonathan:to-json
+            (view-collection
+             (make-instance (gethash :collection resource-hash-value)
+                            :parent parent))))
+          (t (error-message
+              (setf (h:return-code*) h:+http-method-not-allowed+))))))
 
 (defun error-message (code)
-  (cond ((= code h:+http-not-found+) "Resource not found")))
+  (cond ((= code h:+http-not-found+) "Resource not found.")
+        ((= code h:+http-method-not-allowed+) "Method not allowed.")))
