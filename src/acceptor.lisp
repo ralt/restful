@@ -72,14 +72,18 @@
         (load-resource resource)
         (let ((post-data (jonathan:parse (h:raw-post-data :force-text t))))
           (unless (resource-equal (view-resource resource) post-data)
-            (replace-resource resource post-data))))
+            (replace-resource resource post-data))
+          (setf (h:return-code*) h:+http-no-content+)))
     (resource-not-found-error ()
       (create-resource resource
-                       (jonathan:parse (h:raw-post-data :force-text t))))))
+                       (jonathan:parse (h:raw-post-data :force-text t)))
+      (setf (h:return-code*) h:+http-created+))))
 
 (defun handle-patch-resource (resource)
   (load-resource resource)
-  (patch-resource resource (jonathan:parse (h:raw-post-data :force-text t))))
+  (patch-resource resource (jonathan:parse (h:raw-post-data :force-text t)))
+  (setf (h:return-code*) h:+http-no-content+))
 
 (defun handle-delete-resource (resource)
-  (delete-resource resource))
+  (delete-resource resource)
+  (setf (h:return-code*) h:+http-no-content+))
