@@ -7,6 +7,8 @@
   :components ((:module "src"
                         :components
                         ((:file "package")
+                         (:file "storage")
+                         (:file "storages/memory")
                          (:file "resource")
                          (:file "collection")
                          (:file "acceptor")))))

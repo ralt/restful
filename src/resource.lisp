@@ -1,13 +1,12 @@
 (in-package #:restful)
 
 
-(define-condition resource-not-found-error (error)
-  ())
+(define-condition resource-not-found-error (error) ())
 
 (defclass resource ()
-  ((identifier :initarg :identifier)
-   (parent :initarg :parent
-           :reader parent)))
+  ((identifier :initarg :identifier :reader identifier)
+   (parent :initarg :parent :type resource)
+   (storage :initarg :storage :type storage :reader storage)))
 
 (defgeneric view-resource (resource)
   (:documentation "This function should return an object that will be
@@ -28,8 +27,12 @@ serialized to json using the jonathan library."))
 (defgeneric delete-resource (resource)
   (:documentation "This function deletes an existing resource."))
 
+(defmethod print-object ((resource resource) stream))
+
 (defmethod view-resource ((resource resource))
-  (slot-value resource 'identifier))
+  (with-output-to-string (s)
+    (print-object resource s)
+    (get-output-stream-string s)))
 
 (defmethod load-resource ((resource resource)))
 
@@ -39,7 +42,8 @@ serialized to json using the jonathan library."))
 
 (defmethod patch-resource ((resource resource) post-data))
 
-(defmethod delete-resource ((resource resource)))
+(defmethod delete-resource ((resource resource))
+  (delete-item (storage resource) (identifier resource)))
 
 (defun resource-equal (resource1 resource2)
   (equal (resource-normalize resource1)
