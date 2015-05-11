@@ -31,13 +31,7 @@
         (handle-uri (rest (rest parts))
                     (gethash :children resource-hash-value)
                     resource-instance)
-        (let ((method (h:request-method*)))
-          (cond ((eq method :get) (handle-get-resource resource-instance))
-                ((eq method :post) (handle-post-resource resource-instance))
-                ((eq method :patch) (handle-patch-resource resource-instance))
-                ((eq method :delete) (handle-delete-resource resource-instance))
-                (t (error-message
-                    (setf (h:return-code*) h:+http-method-not-allowed+))))))))
+        (handle-resource-method (h:request-method*) resource-instance))))
 
 (defun handle-collection (resource-hash-value parent)
   (let ((method (h:request-method*)))
@@ -52,6 +46,14 @@
 (defun error-message (code)
   (cond ((= code h:+http-not-found+) "Resource not found.")
         ((= code h:+http-method-not-allowed+) "Method not allowed.")))
+
+(defun handle-resource-method (method resource)
+  (cond ((eq method :get) (handle-get-resource resource))
+        ((eq method :post) (handle-post-resource resource))
+        ((eq method :patch) (handle-patch-resource resource))
+        ((eq method :delete) (handle-delete-resource resource))
+        (t (error-message
+            (setf (h:return-code*) h:+http-method-not-allowed+)))))
 
 (defun handle-get-resource (resource)
   (load-resource resource)
