@@ -12,3 +12,4 @@ Spin up new REST entities like madman
 - Handles Accept request header (and response)
 - Handles ACL
 - Define a postgresql storage
+- Add a prefix option

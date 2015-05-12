@@ -3,7 +3,9 @@
 
 (defclass collection ()
   ((parent :initarg :parent
-           :reader parent)))
+           :reader parent)
+   (storage :initarg :storage
+            :reader storage)))
 
 (defgeneric view-collection (collection)
   (:documentation "This function should return an object that will be

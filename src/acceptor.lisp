@@ -2,13 +2,13 @@
 
 
 (defclass acceptor (h:acceptor)
-  ((resource :initarg :resource
-             :type hash-table)))
+  ((resource-definition :initarg :resource-definition
+                        :type hash-table)))
 
 (defmethod h:acceptor-dispatch-request ((acceptor acceptor) request)
   (handler-case
       (let ((path-parts (mapcar #'string-downcase (rest (cl-ppcre:split "/" (hunchentoot:request-uri request))))))
-        (handle-uri path-parts (slot-value acceptor 'resource)))
+        (handle-uri path-parts (slot-value acceptor 'resource-definition)))
     (resource-not-found-error ()
       (error-message (setf (h:return-code*) h:+http-not-found+)))))
 
@@ -28,7 +28,8 @@
   (let ((resource-instance (make-instance
                             (gethash :class resource-hash-value)
                             :identifier (second parts)
-                            :parent parent)))
+                            :parent parent
+                            :storage (gethash :storage resource-hash-value))))
     (if (rest (rest parts))
         (handle-uri (rest (rest parts))
                     (gethash :children resource-hash-value)
@@ -41,7 +42,8 @@
            (jonathan:to-json
             (view-collection
              (make-instance (gethash :collection resource-hash-value)
-                            :parent parent))))
+                            :parent parent
+                            :storage (gethash :storage resource-hash-value)))))
           (t (error-message
               (setf (h:return-code*) h:+http-method-not-allowed+))))))
 
@@ -50,6 +52,7 @@
         ((= code h:+http-method-not-allowed+) "Method not allowed.")))
 
 (defun handle-resource-method (method resource)
+  (break "~A" method)
   (cond ((eq method :get) (handle-get-resource resource))
         ((eq method :post) (handle-post-resource resource))
         ((eq method :put) (handle-put-resource resource))
