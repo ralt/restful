@@ -28,34 +28,46 @@ serialized to json using the jonathan library."))
   (:documentation "This function deletes an existing resource."))
 
 (defmethod view-resource ((resource resource))
-  (let ((slots (resource-get-slots resource)))
+  (let ((slots (get-resource-slots resource)))
     (a:flatten
      (mapcar #'(lambda (slot)
-                 (list (intern (symbol-name slot) :keyword) (slot-value resource
-                                                                        slot)))
+                 (list (intern (symbol-name slot) :keyword)
+                       (slot-value resource slot)))
              slots))))
 
-(defmethod load-resource ((resource resource)))
+(defmethod load-resource ((resource resource))
+  (let ((item (get-item (storage resource) (identifier resource))))
+    (populate-resource resource item)))
 
-(defmethod replace-resource ((resource resource) post-data))
+(defmethod replace-resource ((resource resource) post-data)
+  (populate-resource resource post-data)
+  (save-item (storage resource) resource))
 
-(defmethod create-resource ((resource resource) post-data))
+(defmethod create-resource ((resource resource) post-data)
+  (populate-resource resource post-data)
+  (save-item (storage resource) resource))
 
 (defmethod patch-resource ((resource resource) post-data))
 
 (defmethod delete-resource ((resource resource))
   (delete-item (storage resource) (identifier resource)))
 
-(defun resource-equal (resource1 resource2)
-  (equal (resource-normalize resource1)
-         (resource-normalize resource2)))
+(defun populate-resource (resource filler)
+  (let ((slots (get-resource-slots resource)))
+    (mapcar #'(lambda (slot)
+                (setf (slot-value resource slot) (getf filler slot)))
+            slots)))
 
-(defun resource-normalize (resource)
+(defun equal-resource (resource1 resource2)
+  (equal (normalize-resource resource1)
+         (normalize-resource resource2)))
+
+(defun normalize-resource (resource)
   (a:flatten (sort (a:plist-alist resource)
                    #'(lambda (a b)
                        (< (cdr a) (cdr b))))))
 
-(defun resource-get-slots (resource)
+(defun get-resource-slots (resource)
   (remove-if #'(lambda (slot)
                  (or (eq slot 'parent)
                      (eq slot 'storage)))

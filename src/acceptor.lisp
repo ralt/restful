@@ -71,7 +71,7 @@
       (progn
         (load-resource resource)
         (let ((post-data (jonathan:parse (h:raw-post-data :force-text t))))
-          (unless (resource-equal (view-resource resource) post-data)
+          (unless (equal-resource (view-resource resource) post-data)
             (replace-resource resource post-data))
           (setf (h:return-code*) h:+http-no-content+)))
     (resource-not-found-error ()
