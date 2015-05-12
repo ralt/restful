@@ -27,12 +27,13 @@ serialized to json using the jonathan library."))
 (defgeneric delete-resource (resource)
   (:documentation "This function deletes an existing resource."))
 
-(defmethod print-object ((resource resource) stream))
-
 (defmethod view-resource ((resource resource))
-  (with-output-to-string (s)
-    (print-object resource s)
-    (get-output-stream-string s)))
+  (let ((slots (resource-get-slots resource)))
+    (a:flatten
+     (mapcar #'(lambda (slot)
+                 (list (intern (symbol-name slot) :keyword) (slot-value resource
+                                                                        slot)))
+             slots))))
 
 (defmethod load-resource ((resource resource)))
 
@@ -53,3 +54,10 @@ serialized to json using the jonathan library."))
   (a:flatten (sort (a:plist-alist resource)
                    #'(lambda (a b)
                        (< (cdr a) (cdr b))))))
+
+(defun resource-get-slots (resource)
+  (remove-if #'(lambda (slot)
+                 (or (eq slot 'parent)
+                     (eq slot 'storage)))
+             (mapcar #'closer-mop:slot-definition-name
+                     (closer-mop:class-slots resource))))
