@@ -4,6 +4,7 @@
   :license "MIT License"
   :serial t
   :depends-on (:hunchentoot :alexandria :cl-ppcre :jonathan :closer-mop)
+  :in-order-to ((asdf:test-op (asdf:test-op #:restful-test)))
   :components ((:module "src"
                         :components
                         ((:file "package")

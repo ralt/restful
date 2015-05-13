@@ -1,3 +1,9 @@
+(defpackage #:restful-test
+  (:use #:cl #:prove)
+  (:local-nicknames (#:h #:hunchentoot)))
+
+(in-package #:restful-test)
+
 ;; hash-table literal syntax using braces
 (set-macro-character
  #\{
@@ -19,3 +25,7 @@
                `(setf (gethash ,(car pair) ,retn) ,(cadr pair)))
              pairs)
           ,retn)))))
+
+(defmacro web-run (&body body)
+  `(rest-run #'(lambda ()
+                 ,@body)))
