@@ -18,5 +18,5 @@
                  (make-instance 'restful:acceptor
                                 :port 4242
                                 :resource-definition *resource-definition*))))
-    (funcall fn)
+    (funcall fn "http://localhost:4242")
     (h:stop server)))

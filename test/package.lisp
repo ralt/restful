@@ -26,6 +26,9 @@
              pairs)
           ,retn)))))
 
-(defmacro web-run (&body body)
-  `(rest-run #'(lambda ()
+(defmacro web-run (prefix &body body)
+  `(rest-run #'(lambda ,prefix
                  ,@body)))
+
+(defun cat (&rest args)
+  (apply #'concatenate 'string args))
