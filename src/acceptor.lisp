@@ -52,7 +52,6 @@
         ((= code h:+http-method-not-allowed+) "Method not allowed.")))
 
 (defun handle-resource-method (method resource)
-  (break "~A" method)
   (cond ((eq method :get) (handle-get-resource resource))
         ((eq method :post) (handle-post-resource resource))
         ((eq method :put) (handle-put-resource resource))
@@ -67,7 +66,7 @@
 
 (defun handle-post-resource (resource)
   ;; NIY
-  )
+  (declare (ignore resource)))
 
 (defun handle-put-resource (resource)
   (handler-case
@@ -76,17 +75,17 @@
         (let ((post-data (jonathan:parse (h:raw-post-data :force-text t))))
           (unless (equal-resource (view-resource resource) post-data)
             (replace-resource resource post-data))
-          (setf (h:return-code*) h:+http-no-content+)))
+          (setf (h:return-code*) h:+http-no-content+) ""))
     (resource-not-found-error ()
       (create-resource resource
                        (jonathan:parse (h:raw-post-data :force-text t)))
-      (setf (h:return-code*) h:+http-created+))))
+      (setf (h:return-code*) h:+http-created+) "")))
 
 (defun handle-patch-resource (resource)
   (load-resource resource)
   (patch-resource resource (jonathan:parse (h:raw-post-data :force-text t)))
-  (setf (h:return-code*) h:+http-no-content+))
+  (setf (h:return-code*) h:+http-no-content+) "")
 
 (defun handle-delete-resource (resource)
   (delete-resource resource)
-  (setf (h:return-code*) h:+http-no-content+))
+  (setf (h:return-code*) h:+http-no-content+) "")

@@ -3,9 +3,10 @@
 
 (defvar *server* nil)
 
-(defclass foobar (restful:resource) ())
-(defclass foobar-collection (restful:collection)
+(defclass foobar (restful:resource)
   ((name :reader name)))
+(defclass foobar-collection (restful:collection)
+  ())
 
 (defvar *storage* (make-instance 'restful:memory-storage))
 (defvar *resource-definition* { "foo" {
@@ -20,3 +21,5 @@
                                 :resource-definition *resource-definition*))))
     (funcall fn "http://localhost:4242")
     (h:stop server)))
+
+(setf restful::*memory-storage-items* (make-hash-table :test #'equal))
