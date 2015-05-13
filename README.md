@@ -4,8 +4,9 @@ Spin up new REST entities like madman
 
 ## Roadmap
 
-- Adds error handling
-- Handles Accept request header (and response)
-- Handles ACL
+- Add functional tests for every route
+- Add error handling
+- Handle Accept request header (and response)
+- Handle ACL
 - Define a postgresql storage
 - Add a prefix option
