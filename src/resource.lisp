@@ -31,7 +31,7 @@ serialized to json using the jonathan library."))
   (let ((slots (get-resource-slots resource)))
     (a:flatten
      (mapcar #'(lambda (slot)
-                 (list (intern (symbol-name slot) :keyword)
+                 (list (intern (string-upcase (symbol-name slot)) :keyword)
                        (slot-value resource slot)))
              slots))))
 
@@ -58,7 +58,7 @@ serialized to json using the jonathan library."))
   (let ((slots (get-resource-slots resource)))
     (mapcar #'(lambda (slot)
                 (setf (slot-value resource slot)
-                      (getf filler (intern (string-downcase (symbol-name slot))
+                      (getf filler (intern (string-upcase (symbol-name slot))
                                            :keyword))))
             slots)))
 
