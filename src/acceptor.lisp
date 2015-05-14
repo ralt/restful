@@ -92,6 +92,7 @@
   (setf (h:return-code*) h:+http-no-content+) "")
 
 (defun handle-delete-resource (resource)
+  (load-resource resource)
   (delete-resource resource)
   (setf (h:return-code*) h:+http-no-content+) "")
 

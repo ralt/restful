@@ -27,5 +27,3 @@
 
 (defun rest-run (fn)
   (funcall fn "http://localhost:4242"))
-
-(setf restful::*memory-storage-items* (make-hash-table :test #'equal))
