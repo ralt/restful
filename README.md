@@ -8,5 +8,6 @@ Spin up new REST entities like madman
 - Add error handling
 - Handle Accept request header (and response)
 - Handle ACL
-- Define a postgresql storage
+- Add custom actions through resource's POST
 - Add a prefix option
+- Define a postgresql storage
