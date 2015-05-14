@@ -27,6 +27,13 @@ serialized to json using the jonathan library."))
 (defgeneric delete-resource (resource)
   (:documentation "This function deletes an existing resource."))
 
+(defmethod jonathan:%to-json ((resource resource))
+  (jonathan:with-object
+    (loop
+       :for slot in (get-resource-slots resource)
+       :do (jonathan:write-key-value (string-downcase (symbol-name slot))
+                                     (slot-value resource slot)))))
+
 (defmethod view-resource ((resource resource))
   (let ((slots (get-resource-slots resource)))
     (a:flatten

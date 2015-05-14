@@ -11,7 +11,7 @@
   (multiple-value-bind (_ status-code)
       (drakma:http-request (cat prefix "/foo/bar")
                            :method :put
-                           :content "{\"IDENTIFIER\":\"bar\",\"NAME\":\"qux\"}")
+                           :content "{\"identifier\":\"bar\",\"name\":\"qux\"}")
     (declare (ignore _))
     (is status-code 201)))
 
@@ -19,12 +19,12 @@
   (multiple-value-bind (_ status-code)
       (drakma:http-request (cat prefix "/foo/bar")
                            :method :put
-                           :content "{\"IDENTIFIER\":\"bar\",\"NAME\":\"qux\"}")
+                           :content "{\"identifier\":\"bar\",\"name\":\"qux\"}")
     (declare (ignore _))
     (is status-code 204)))
 
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo/bar"))))
-    (is response "{\"IDENTIFIER\":\"bar\",\"NAME\":\"qux\"}")))
+    (is response "{\"identifier\":\"bar\",\"name\":\"qux\"}")))
 
 (finalize)

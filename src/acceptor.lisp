@@ -62,7 +62,7 @@
 
 (defun handle-get-resource (resource)
   (load-resource resource)
-  (jonathan:to-json (view-resource resource)))
+  (jonathan:to-json resource))
 
 (defun handle-post-resource (resource)
   ;; NIY
@@ -72,20 +72,31 @@
   (handler-case
       (progn
         (load-resource resource)
-        (let ((post-data (jonathan:parse (h:raw-post-data :force-text t))))
+        (let ((post-data (normalize-keywords
+                          (jonathan:parse (h:raw-post-data :force-text t)))))
           (unless (equal-resource (view-resource resource) post-data)
             (replace-resource resource post-data))
           (setf (h:return-code*) h:+http-no-content+) ""))
     (resource-not-found-error ()
       (create-resource resource
-                       (jonathan:parse (h:raw-post-data :force-text t)))
+                       (normalize-keywords
+                        (jonathan:parse (h:raw-post-data :force-text t))))
       (setf (h:return-code*) h:+http-created+) "")))
 
 (defun handle-patch-resource (resource)
   (load-resource resource)
-  (patch-resource resource (jonathan:parse (h:raw-post-data :force-text t)))
+  (patch-resource resource (normalize-keywords
+                            (jonathan:parse (h:raw-post-data :force-text t))))
   (setf (h:return-code*) h:+http-no-content+) "")
 
 (defun handle-delete-resource (resource)
   (delete-resource resource)
   (setf (h:return-code*) h:+http-no-content+) "")
+
+(defun normalize-keywords (symbols)
+  (mapcar #'normalize-keyword symbols))
+
+(defun normalize-keyword (symbol)
+  (if (keywordp symbol)
+      (intern (string-upcase (symbol-name symbol)) :keyword)
+      symbol))
