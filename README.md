@@ -4,6 +4,7 @@ Spin up new REST entities like madman
 
 ## Roadmap
 
+- Add PATCH handling
 - Add functional tests for every route
 - Add error handling
 - Handle Accept request header (and response)
