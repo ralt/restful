@@ -14,12 +14,18 @@
         :collection 'foobar-collection
         :storage *storage*} })
 
+(defvar *server* nil)
+
+(defun start-web ()
+  (setf *server* (h:start
+                  (make-instance 'restful:acceptor
+                                 :port 4242
+                                 :resource-definition *resource-definition*))))
+
+(defun stop-web ()
+  (h:stop *server*))
+
 (defun rest-run (fn)
-  (let ((server (h:start
-                 (make-instance 'restful:acceptor
-                                :port 4242
-                                :resource-definition *resource-definition*))))
-    (funcall fn "http://localhost:4242")
-    (h:stop server)))
+  (funcall fn "http://localhost:4242"))
 
 (setf restful::*memory-storage-items* (make-hash-table :test #'equal))

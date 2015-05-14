@@ -3,6 +3,9 @@
 
 (defclass storage () ())
 
+(defgeneric get-items (storage)
+  (:documentation "Returns all the items in the storage."))
+
 (defgeneric get-item (storage identifier)
   (:documentation "Gets a single item in the storage."))
 

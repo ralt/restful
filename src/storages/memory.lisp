@@ -6,6 +6,9 @@
 (defclass memory-storage (storage)
   ())
 
+(defmethod get-items ((storage memory-storage))
+  (a:hash-table-values *memory-storage-items*))
+
 (defmethod get-item ((storage memory-storage) identifier)
   (gethash identifier *memory-storage-items*))
 

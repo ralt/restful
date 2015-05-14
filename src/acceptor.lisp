@@ -43,7 +43,9 @@
             (view-collection
              (make-instance (gethash :collection resource-hash-value)
                             :parent parent
-                            :storage (gethash :storage resource-hash-value)))))
+                            :storage (gethash :storage resource-hash-value)
+                            :class-of-resource (gethash :class
+                                                        resource-hash-value)))))
           (t (error-message
               (setf (h:return-code*) h:+http-method-not-allowed+))))))
 
