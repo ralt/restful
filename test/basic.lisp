@@ -1,7 +1,7 @@
 (in-package #:restful-test)
 
 
-(plan 10)
+(plan 12)
 
 (start-web)
 
@@ -64,6 +64,18 @@
                            :method :delete)
     (declare (ignore _))
     (is status-code 404)))
+
+(web-run (prefix)
+  (multiple-value-bind (_ status-code)
+      (drakma:http-request (cat prefix "/foo/bar")
+                           :method :patch
+                           :content "{\"name\":\"biz\"}")
+    (declare (ignore _))
+    (is status-code 204)))
+
+(web-run (prefix)
+  (let ((response (drakma:http-request (cat prefix "/foo/bar"))))
+    (is response "{\"identifier\":\"bar\",\"name\":\"biz\"}")))
 
 (stop-web)
 

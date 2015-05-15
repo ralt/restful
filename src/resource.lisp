@@ -56,7 +56,13 @@ serialized to json using the jonathan library."))
   (populate-resource resource post-data)
   (save-item (storage resource) resource))
 
-(defmethod patch-resource ((resource resource) post-data))
+(defmethod patch-resource ((resource resource) post-data)
+  (loop
+     :for slot in (get-resource-slots resource)
+     :do (let ((slot-keyword (intern (string-upcase (symbol-name slot)) :keyword)))
+           (when (member slot-keyword post-data)
+             (setf (slot-value resource slot) (getf post-data slot-keyword)))))
+  (save-item (storage resource) resource))
 
 (defmethod delete-resource ((resource resource))
   (delete-item (storage resource) (identifier resource)))
