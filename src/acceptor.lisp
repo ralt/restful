@@ -6,6 +6,11 @@
                         :type hash-table)))
 
 (defmethod h:acceptor-dispatch-request ((acceptor acceptor) request)
+  ;; Only application/json
+  (unless (cl-ppcre:scan "application/json" (h:header-in* :accept))
+    (return-from h:acceptor-dispatch-request
+      (error-message (setf (h:return-code*) h:+http-not-acceptable+))))
+  (setf (h:header-out :content-type) "application/json; charset=UTF-8")
   (handler-case
       (let ((path-parts (mapcar #'string-downcase (rest (cl-ppcre:split "/" (hunchentoot:request-uri request))))))
         (handle-uri path-parts (slot-value acceptor 'resource-definition)))
