@@ -10,7 +10,9 @@
       (let ((path-parts (mapcar #'string-downcase (rest (cl-ppcre:split "/" (hunchentoot:request-uri request))))))
         (handle-uri path-parts (slot-value acceptor 'resource-definition)))
     (resource-not-found-error ()
-      (error-message (setf (h:return-code*) h:+http-not-found+)))))
+      (error-message (setf (h:return-code*) h:+http-not-found+)))
+    (error () (error-message
+               (setf (h:return-code*) h:+http-internal-server-error+)))))
 
 (defun handle-uri (parts resources &optional parent)
   (let* ((keys (mapcar #'string-downcase (a:hash-table-keys resources)))
@@ -51,7 +53,8 @@
 
 (defun error-message (code)
   (cond ((= code h:+http-not-found+) "Resource not found.")
-        ((= code h:+http-method-not-allowed+) "Method not allowed.")))
+        ((= code h:+http-method-not-allowed+) "Method not allowed.")
+        ((= code h:+http-internal-server-error+) "Internal server error.")))
 
 (defun handle-resource-method (method resource)
   (cond ((eq method :get) (handle-get-resource resource))

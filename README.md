@@ -4,7 +4,6 @@ Spin up new REST entities like madman
 
 ## Roadmap
 
-- Add error handling
 - Handle Accept request header (and response)
 - Handle custom identifier
 - Handle ACL
