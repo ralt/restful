@@ -16,6 +16,8 @@
         (handle-uri path-parts (slot-value acceptor 'resource-definition)))
     (resource-not-found-error ()
       (error-message (setf (h:return-code*) h:+http-not-found+)))
+    (resource-field-missing ()
+      (error-message (setf (h:return-code*) h:+http-bad-request+)))
     (error () (error-message
                (setf (h:return-code*) h:+http-internal-server-error+)))))
 
@@ -66,9 +68,11 @@
               (setf (h:return-code*) h:+http-method-not-allowed+))))))
 
 (defun error-message (code)
-  (cond ((= code h:+http-not-found+) "Resource not found.")
-        ((= code h:+http-method-not-allowed+) "Method not allowed.")
-        ((= code h:+http-internal-server-error+) "Internal server error.")))
+  (cond
+    ((= code h:+http-bad-request+) "Bad request.")
+    ((= code h:+http-not-found+) "Resource not found.")
+    ((= code h:+http-method-not-allowed+) "Method not allowed.")
+    ((= code h:+http-internal-server-error+) "Internal server error.")))
 
 (defun handle-resource-method (method resource)
   (cond ((eq method :get) (handle-get-resource resource))

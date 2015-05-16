@@ -2,6 +2,7 @@
 
 
 (define-condition resource-not-found-error (error) ())
+(define-condition resource-field-missing (error) ())
 
 (defclass resource ()
   ((parent :initarg :parent :type resource)
@@ -74,11 +75,24 @@ serialized to json using the jonathan library."))
 
 (defun populate-resource (resource filler)
   (let ((slots (get-resource-slots resource)))
-    (mapcar #'(lambda (slot)
-                (setf (slot-value resource slot)
-                      (getf filler (intern (string-upcase (symbol-name slot))
-                                           :keyword))))
-            slots)))
+    (mapcar (populate-slot resource filler) slots)))
+
+(defun populate-slot (resource filler)
+  (let ()
+    (lambda (slot)
+      (let ((filler-value (getf filler (intern (string-upcase (symbol-name slot))
+                                               :keyword))))
+        (if (and (slot-is-required resource slot) (not filler-value))
+            (error 'resource-field-missing)
+            (setf (slot-value resource slot)
+                  (or filler-value "")))))))
+
+(defun slot-is-required (resource slot)
+  (find-if #'(lambda (slot-definition)
+               (when (eq (closer-mop:slot-definition-name slot-definition) slot)
+                 (or (slot-value slot-definition 'required)
+                     (slot-value slot-definition 'is-identifier))))
+           (closer-mop:class-slots (class-of resource))))
 
 (defun equal-resource (resource1 resource2)
   (equal (normalize-resource resource1)

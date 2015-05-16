@@ -6,7 +6,7 @@
 (start-web)
 
 (setf restful::*memory-storage-items* (make-hash-table :test #'equal))
-(setf drakma:*text-content-types* '(("application" . nil)))
+(setf drakma:*text-content-types* '(("application" . "json")))
 
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
@@ -34,12 +34,12 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo/bar")
                                        :accept "application/json")))
-    (is response "{\"identifier\":\"bar\",\"name\":\"qux\"}")))
+    (is response "{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}")))
 
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\"}]")))
+    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -53,7 +53,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"baz\",\"name\":\"qux\"},{\"identifier\":\"bar\",\"name\":\"qux\"}]")))
+    (is response "[{\"identifier\":\"baz\",\"name\":\"qux\",\"foo\":\"\"},{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -66,7 +66,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\"}]")))
+    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -88,7 +88,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo/bar")
                                        :accept "application/json")))
-    (is response "{\"identifier\":\"bar\",\"name\":\"biz\"}")))
+    (is response "{\"identifier\":\"bar\",\"name\":\"biz\",\"foo\":\"\"}")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code headers)
@@ -96,6 +96,15 @@
     (declare (ignore _))
     (is status-code 200)
     (is (drakma:header-value :content-type headers) "application/json; charset=UTF-8")))
+
+(web-run (prefix)
+  (multiple-value-bind (_ status-code)
+      (drakma:http-request (cat prefix "/foo/qux")
+                           :method :put
+                           :accept "application/json"
+                           :content "{\"identifier\":\"qux\"}")
+    (declare (ignore _))
+    (is status-code 400)))
 
 (stop-web)
 
