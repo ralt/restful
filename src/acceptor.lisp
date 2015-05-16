@@ -16,15 +16,12 @@
         (handle-uri path-parts (slot-value acceptor 'resource-definition)))
     (resource-not-found-error ()
       (http-error h:+http-not-found+))
-    (resource-field-missing ()
+    (request-data-missing ()
       (http-error h:+http-bad-request+))
-    (resource-action-not-allowed ()
+    (permission-rejected ()
       (http-error h:+http-forbidden+))
     (error ()
       (http-error h:+http-internal-server-error+))))
-
-(defun http-error (code)
-  (error-message (setf (h:return-code*) code)))
 
 (defun handle-uri (parts resources &optional parent)
   (let* ((keys (mapcar #'string-downcase (a:hash-table-keys resources)))
@@ -51,14 +48,6 @@
                     resource-instance)
         (handle-resource-method (h:request-method*) resource-instance))))
 
-(defun find-identifier-slot (class)
-  ;; Dummy instance for closer-mop:class-slots to work
-  (make-instance class)
-  (closer-mop:slot-definition-name
-   (find-if #'(lambda (slot-definition)
-                (slot-value slot-definition 'is-identifier))
-            (closer-mop:class-slots (find-class class)))))
-
 (defun handle-collection (resource-hash-value parent)
   (let ((method (h:request-method*)))
     (cond ((eq method :get)
@@ -71,17 +60,9 @@
                                                         resource-hash-value)))))
           (t (http-error h:+http-method-not-allowed+)))))
 
-(defun error-message (code)
-  (cond
-    ((= code h:+http-bad-request+) "Bad request.")
-    ((= code h:+http-forbidden+) "Forbidden.")
-    ((= code h:+http-not-found+) "Resource not found.")
-    ((= code h:+http-method-not-allowed+) "Method not allowed.")
-    ((= code h:+http-internal-server-error+) "Internal server error.")))
-
 (defun handle-resource-method (method resource)
   (unless (has-permission resource method)
-    (error 'resource-action-not-allowed))
+    (error 'permission-rejected))
   (cond ((eq method :get) (handle-get-resource resource))
         ((eq method :post) (handle-post-resource resource))
         ((eq method :put) (handle-put-resource resource))
@@ -122,11 +103,3 @@
   (load-resource resource)
   (delete-resource resource)
   (setf (h:return-code*) h:+http-no-content+) "")
-
-(defun normalize-keywords (symbols)
-  (mapcar #'normalize-keyword symbols))
-
-(defun normalize-keyword (symbol)
-  (if (keywordp symbol)
-      (intern (string-upcase (symbol-name symbol)) :keyword)
-      symbol))

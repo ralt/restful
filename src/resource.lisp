@@ -1,10 +1,6 @@
 (in-package #:restful)
 
 
-(define-condition resource-not-found-error (error) ())
-(define-condition resource-field-missing (error) ())
-(define-condition resource-action-not-allowed (error) ())
-
 (defclass resource ()
   ((parent :initarg :parent :type resource)
    (storage :initarg :storage :type storage :reader storage))
@@ -86,49 +82,6 @@ hit the resource."))
   (let ((slots (get-resource-slots resource)))
     (mapcar (populate-slot resource filler) slots)))
 
-(defun populate-slot (resource filler)
-  (let ()
-    (lambda (slot)
-      (let ((filler-value))
-        (handler-case
-            (setf filler-value (getf filler (intern (string-upcase (symbol-name slot))
-                                                    :keyword)))
-          (simple-type-error ()
-            (setf filler-value (slot-default-value resource slot))))
-        (if (and (slot-is-required resource slot) (not filler-value))
-            (error 'resource-field-missing)
-            (setf (slot-value resource slot) filler-value))))))
-
-(defun slot-is-required (resource slot)
-  (find-if #'(lambda (slot-definition)
-               (when (eq (closer-mop:slot-definition-name slot-definition) slot)
-                 (or (slot-value slot-definition 'required)
-                     (slot-value slot-definition 'is-identifier))))
-           (closer-mop:class-slots (class-of resource))))
-
-(defun slot-default-value (resource slot)
-  (let ((slot-definition (find-if
-                          #'(lambda (slot-definition)
-                              (when (eq (closer-mop:slot-definition-name slot-definition) slot)
-                                (slot-value slot-definition 'default)))
-                          (closer-mop:class-slots (class-of resource)))))
-    (let ((default-value (slot-value slot-definition 'default)))
-      (unless default-value
-        (error 'resource-field-missing))
-      default-value)))
-
 (defun equal-resource (resource1 resource2)
   (equal (normalize-resource resource1)
          (normalize-resource resource2)))
-
-(defun normalize-resource (resource)
-  (a:flatten (sort (a:plist-alist resource)
-                   #'(lambda (a b)
-                       (string< (cdr a) (cdr b))))))
-
-(defun get-resource-slots (resource)
-  (remove-if #'(lambda (slot)
-                 (or (eq slot 'parent)
-                     (eq slot 'storage)))
-             (mapcar #'closer-mop:slot-definition-name
-                     (closer-mop:class-slots (class-of resource)))))

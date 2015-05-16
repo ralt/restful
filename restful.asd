@@ -8,9 +8,12 @@
   :components ((:module "src"
                         :components
                         ((:file "package")
+                         (:file "condition")
                          (:file "storage")
                          (:file "storages/memory")
                          (:file "resource-metaclass")
+                         (:file "slot")
                          (:file "resource")
                          (:file "collection")
+                         (:file "http")
                          (:file "acceptor")))))

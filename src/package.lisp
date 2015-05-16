@@ -6,6 +6,7 @@
    ;; classes
    :acceptor
    :resource
+   :resource-metaclass
    :collection
    :storage
    :memory-storage
