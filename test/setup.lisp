@@ -6,7 +6,7 @@
 (defclass foobar (restful:resource)
   ((identifier :is-identifier t)
    (name :reader name :required t)
-   (foo :reader foo))
+   (foo :reader foo :default "biz"))
   (:metaclass restful::resource-metaclass))
 (defclass foobar-collection (restful:collection)
   ())

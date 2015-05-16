@@ -1,7 +1,7 @@
 (in-package #:restful-test)
 
 
-(plan 14)
+(plan 15)
 
 (start-web)
 
@@ -34,12 +34,12 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo/bar")
                                        :accept "application/json")))
-    (is response "{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}")))
+    (is response "{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"biz\"}")))
 
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
+    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"biz\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -53,7 +53,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"baz\",\"name\":\"qux\",\"foo\":\"\"},{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
+    (is response "[{\"identifier\":\"baz\",\"name\":\"qux\",\"foo\":\"biz\"},{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"biz\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -66,7 +66,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo")
                                        :accept "application/json")))
-    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"\"}]")))
+    (is response "[{\"identifier\":\"bar\",\"name\":\"qux\",\"foo\":\"biz\"}]")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code)
@@ -88,7 +88,7 @@
 (web-run (prefix)
   (let ((response (drakma:http-request (cat prefix "/foo/bar")
                                        :accept "application/json")))
-    (is response "{\"identifier\":\"bar\",\"name\":\"biz\",\"foo\":\"\"}")))
+    (is response "{\"identifier\":\"bar\",\"name\":\"biz\",\"foo\":\"biz\"}")))
 
 (web-run (prefix)
   (multiple-value-bind (_ status-code headers)

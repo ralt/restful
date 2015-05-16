@@ -5,11 +5,13 @@
 
 (defclass resource-standard-direct-slot-definition (closer-mop:standard-direct-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)
-   (required :initarg :required :initform nil)))
+   (required :initarg :required :initform nil)
+   (default :initarg :default :initform nil)))
 
 (defclass resource-standard-effective-slot-definition (closer-mop:standard-effective-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)
-   (required :initarg :required :initform nil)))
+   (required :initarg :required :initform nil)
+   (default :initarg :default :initform nil)))
 
 (defmethod closer-mop:direct-slot-definition-class ((class resource-metaclass) &rest initargs)
   (declare (ignore initargs))
@@ -33,6 +35,7 @@
       (when (typep slotd 'resource-standard-direct-slot-definition)
         (setf
          (slot-value effective-slotd 'is-identifier) (slot-value slotd 'is-identifier)
-         (slot-value effective-slotd 'required) (slot-value slotd 'required))
+         (slot-value effective-slotd 'required) (slot-value slotd 'required)
+         (slot-value effective-slotd 'default) (slot-value slotd 'default))
         (return)))
     effective-slotd))
