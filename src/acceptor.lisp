@@ -18,6 +18,8 @@
       (error-message (setf (h:return-code*) h:+http-not-found+)))
     (resource-field-missing ()
       (error-message (setf (h:return-code*) h:+http-bad-request+)))
+    (resource-action-not-allowed ()
+      (error-message (setf (h:return-code*) h:+http-forbidden+)))
     (error () (error-message
                (setf (h:return-code*) h:+http-internal-server-error+)))))
 
@@ -70,11 +72,14 @@
 (defun error-message (code)
   (cond
     ((= code h:+http-bad-request+) "Bad request.")
+    ((= code h:+http-forbidden+) "Forbidden.")
     ((= code h:+http-not-found+) "Resource not found.")
     ((= code h:+http-method-not-allowed+) "Method not allowed.")
     ((= code h:+http-internal-server-error+) "Internal server error.")))
 
 (defun handle-resource-method (method resource)
+  (unless (has-permission resource method)
+    (error 'resource-action-not-allowed))
   (cond ((eq method :get) (handle-get-resource resource))
         ((eq method :post) (handle-post-resource resource))
         ((eq method :put) (handle-put-resource resource))

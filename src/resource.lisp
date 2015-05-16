@@ -3,6 +3,7 @@
 
 (define-condition resource-not-found-error (error) ())
 (define-condition resource-field-missing (error) ())
+(define-condition resource-action-not-allowed (error) ())
 
 (defclass resource ()
   ((parent :initarg :parent :type resource)
@@ -27,6 +28,10 @@ serialized to json using the jonathan library."))
 
 (defgeneric delete-resource (resource)
   (:documentation "This function deletes an existing resource."))
+
+(defgeneric has-permission (resource method)
+  (:documentation "This function determines if the request has permission to
+hit the resource."))
 
 (defmethod jonathan:%to-json ((resource resource))
   (jonathan:with-object
@@ -72,6 +77,10 @@ serialized to json using the jonathan library."))
   (delete-item (storage resource) (slot-value resource (find-identifier-slot
                                                         (class-name
                                                          (class-of resource))))))
+
+(defmethod has-permission ((resource resource) method)
+  (declare (ignore resource method))
+  t)
 
 (defun populate-resource (resource filler)
   (let ((slots (get-resource-slots resource)))
