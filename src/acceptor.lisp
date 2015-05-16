@@ -9,19 +9,22 @@
   ;; Only application/json
   (unless (cl-ppcre:scan "application/json" (h:header-in* :accept))
     (return-from h:acceptor-dispatch-request
-      (error-message (setf (h:return-code*) h:+http-not-acceptable+))))
+      (http-error h:+http-not-acceptable+)))
   (setf (h:header-out :content-type) "application/json; charset=UTF-8")
   (handler-case
       (let ((path-parts (mapcar #'string-downcase (rest (cl-ppcre:split "/" (hunchentoot:request-uri request))))))
         (handle-uri path-parts (slot-value acceptor 'resource-definition)))
     (resource-not-found-error ()
-      (error-message (setf (h:return-code*) h:+http-not-found+)))
+      (http-error h:+http-not-found+))
     (resource-field-missing ()
-      (error-message (setf (h:return-code*) h:+http-bad-request+)))
+      (http-error h:+http-bad-request+))
     (resource-action-not-allowed ()
-      (error-message (setf (h:return-code*) h:+http-forbidden+)))
-    (error () (error-message
-               (setf (h:return-code*) h:+http-internal-server-error+)))))
+      (http-error h:+http-forbidden+))
+    (error ()
+      (http-error h:+http-internal-server-error+))))
+
+(defun http-error (code)
+  (error-message (setf (h:return-code*) code)))
 
 (defun handle-uri (parts resources &optional parent)
   (let* ((keys (mapcar #'string-downcase (a:hash-table-keys resources)))
@@ -66,8 +69,7 @@
                             :storage (gethash :storage resource-hash-value)
                             :class-of-resource (gethash :class
                                                         resource-hash-value)))))
-          (t (error-message
-              (setf (h:return-code*) h:+http-method-not-allowed+))))))
+          (t (http-error h:+http-method-not-allowed+)))))
 
 (defun error-message (code)
   (cond
@@ -85,8 +87,7 @@
         ((eq method :put) (handle-put-resource resource))
         ((eq method :patch) (handle-patch-resource resource))
         ((eq method :delete) (handle-delete-resource resource))
-        (t (error-message
-            (setf (h:return-code*) h:+http-method-not-allowed+)))))
+        (t (http-error h:+http-method-not-allowed+))))
 
 (defun handle-get-resource (resource)
   (load-resource resource)
