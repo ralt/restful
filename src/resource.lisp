@@ -4,9 +4,9 @@
 (define-condition resource-not-found-error (error) ())
 
 (defclass resource ()
-  ((identifier :initarg :identifier :reader identifier)
-   (parent :initarg :parent :type resource)
-   (storage :initarg :storage :type storage :reader storage)))
+  ((parent :initarg :parent :type resource)
+   (storage :initarg :storage :type storage :reader storage))
+  (:metaclass resource-metaclass))
 
 (defgeneric view-resource (resource)
   (:documentation "This function should return an object that will be
@@ -43,7 +43,10 @@ serialized to json using the jonathan library."))
              slots))))
 
 (defmethod load-resource ((resource resource))
-  (let ((item (get-item (storage resource) (identifier resource))))
+  (let ((item (get-item (storage resource) (slot-value resource
+                                                       (find-identifier-slot
+                                                        (class-name
+                                                         (class-of resource)))))))
     (if item
         (populate-resource resource item)
         (error 'resource-not-found-error))))
@@ -65,7 +68,9 @@ serialized to json using the jonathan library."))
   (save-item (storage resource) resource))
 
 (defmethod delete-resource ((resource resource))
-  (delete-item (storage resource) (identifier resource)))
+  (delete-item (storage resource) (slot-value resource (find-identifier-slot
+                                                        (class-name
+                                                         (class-of resource))))))
 
 (defun populate-resource (resource filler)
   (let ((slots (get-resource-slots resource)))

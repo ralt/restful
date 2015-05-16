@@ -10,6 +10,7 @@
                         ((:file "package")
                          (:file "storage")
                          (:file "storages/memory")
+                         (:file "resource-metaclass")
                          (:file "resource")
                          (:file "collection")
                          (:file "acceptor")))))

@@ -32,16 +32,26 @@
         (error 'resource-not-found-error))))
 
 (defun handle-resource (parts resource-hash-value parent)
-  (let ((resource-instance (make-instance
-                            (gethash :class resource-hash-value)
-                            :identifier (second parts)
-                            :parent parent
-                            :storage (gethash :storage resource-hash-value))))
+  (let* ((identifier-slot (find-identifier-slot (gethash :class resource-hash-value)))
+         (resource-instance (make-instance
+                             (gethash :class resource-hash-value)
+                             :parent parent
+                             :storage (gethash :storage resource-hash-value))))
+    (setf (slot-value resource-instance identifier-slot) (second parts))
     (if (rest (rest parts))
         (handle-uri (rest (rest parts))
                     (gethash :children resource-hash-value)
                     resource-instance)
         (handle-resource-method (h:request-method*) resource-instance))))
+
+(defun find-identifier-slot (class)
+  ;; Dummy instance for closer-mop:class-slots to work
+  (make-instance class)
+  (closer-mop:slot-definition-name
+   (find-if #'(lambda (slot-definition)
+                (when (slot-exists-p slot-definition 'is-identifier)
+                  (slot-value slot-definition 'is-identifier)))
+            (closer-mop:class-slots (find-class class)))))
 
 (defun handle-collection (resource-hash-value parent)
   (let ((method (h:request-method*)))

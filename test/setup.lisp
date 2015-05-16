@@ -4,7 +4,9 @@
 (defvar *server* nil)
 
 (defclass foobar (restful:resource)
-  ((name :reader name)))
+  ((identifier :is-identifier t)
+   (name :reader name))
+  (:metaclass restful::resource-metaclass))
 (defclass foobar-collection (restful:collection)
   ())
 
