@@ -49,8 +49,7 @@
   (make-instance class)
   (closer-mop:slot-definition-name
    (find-if #'(lambda (slot-definition)
-                (when (slot-exists-p slot-definition 'is-identifier)
-                  (slot-value slot-definition 'is-identifier)))
+                (slot-value slot-definition 'is-identifier))
             (closer-mop:class-slots (find-class class)))))
 
 (defun handle-collection (resource-hash-value parent)
