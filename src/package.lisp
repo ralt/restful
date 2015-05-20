@@ -18,6 +18,8 @@
    :create-resource
    :patch-resource
    :delete-resource
+   :has-permission
+   :resource-action
 
    ;; collection's methods
    :view-collection

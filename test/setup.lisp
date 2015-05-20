@@ -4,12 +4,16 @@
 (defvar *server* nil)
 
 (defclass foobar (restful:resource)
-  ((identifier :is-identifier t)
+  ((identifier :is-identifier t :reader identifier)
    (name :reader name :required t)
    (foo :reader foo :default "biz"))
   (:metaclass restful::resource-metaclass))
 (defclass foobar-collection (restful:collection)
   ())
+
+(defmethod restful:resource-action ((resource foobar))
+  (cond ((string= (identifier resource) "login") "login")
+        ((string= (identifier resource) "logout") "logout")))
 
 (defvar *storage* (make-instance 'restful:memory-storage))
 (defvar *resource-definition* { "foo" {

@@ -25,6 +25,10 @@ serialized to json using the jonathan library."))
 (defgeneric delete-resource (resource)
   (:documentation "This function deletes an existing resource."))
 
+(defgeneric resource-action (resource)
+  (:documentation "This function lets you handle actions on the resource.
+The :identifier slot lets you know which action is called."))
+
 (defgeneric has-permission (resource method)
   (:documentation "This function determines if the request has permission to
 hit the resource."))
@@ -68,6 +72,9 @@ hit the resource."))
            (when (member slot-keyword post-data)
              (setf (slot-value resource slot) (getf post-data slot-keyword)))))
   (save-item (storage resource) resource))
+
+(defmethod resource-action ((resource resource))
+  (http-error h:+http-not-found+))
 
 (defmethod delete-resource ((resource resource))
   (delete-item (storage resource) (slot-value resource (find-identifier-slot

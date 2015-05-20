@@ -75,8 +75,7 @@
   (jonathan:to-json resource))
 
 (defun handle-post-resource (resource)
-  ;; NIY
-  (declare (ignore resource)))
+  (resource-action resource))
 
 (defun handle-put-resource (resource)
   (handler-case

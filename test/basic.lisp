@@ -1,7 +1,7 @@
 (in-package #:restful-test)
 
 
-(plan 15)
+(plan 16)
 
 (start-web)
 
@@ -98,13 +98,16 @@
     (is (drakma:header-value :content-type headers) "application/json; charset=UTF-8")))
 
 (web-run (prefix)
-  (multiple-value-bind (_ status-code)
-      (drakma:http-request (cat prefix "/foo/qux")
-                           :method :put
-                           :accept "application/json"
-                           :content "{\"identifier\":\"qux\"}")
-    (declare (ignore _))
-    (is status-code 400)))
+  (let ((response (drakma:http-request (cat prefix "/foo/login")
+                                       :method :post
+                                       :accept "application/json")))
+    (is response "login")))
+
+(web-run (prefix)
+  (let ((response (drakma:http-request (cat prefix "/foo/logout")
+                                       :method :post
+                                       :accept "application/json")))
+    (is response "logout")))
 
 (stop-web)
 
