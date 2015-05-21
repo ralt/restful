@@ -3,9 +3,11 @@
 
 (plan 16)
 
-(start-web)
+(start-web { "foo" {
+        :class 'foobar
+        :collection 'foobar-collection
+        :storage (make-instance 'restful:memory-storage) } })
 
-(setf restful::*memory-storage-items* (make-hash-table :test #'equal))
 (setf drakma:*text-content-types* '(("application" . "json")))
 
 (web-run (prefix)
