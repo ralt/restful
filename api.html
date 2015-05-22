@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>restful - REST APIs made easy</title>
+  <style type="text/css">
+  pre { padding:5px; background-color:#e0e0e0 }
+  h3, h4 { text-decoration: underline; }
+  a { text-decoration: none; padding: 1px 2px 1px 2px; }
+  a:visited { text-decoration: none; padding: 1px 2px 1px 2px; }
+  a:hover { text-decoration: none; padding: 1px 1px 1px 1px; border: 1px solid #000000; }
+  a:focus { text-decoration: none; padding: 1px 2px 1px 2px; border: none; }
+  a.none { text-decoration: none; padding: 0; }
+  a.none:visited { text-decoration: none; padding: 0; }
+  a.none:hover { text-decoration: none; border: none; padding: 0; }
+  a.none:focus { text-decoration: none; border: none; padding: 0; }
+  a.noborder { text-decoration: none; padding: 0; }
+  a.noborder:visited { text-decoration: none; padding: 0; }
+  a.noborder:hover { text-decoration: none; border: none; padding: 0; }
+  a.noborder:focus { text-decoration: none; border: none; padding: 0; }
+  pre.none { padding:5px; background-color:#ffffff }
+  </style>
+</head>
+
+<body bgcolor=white>
+
+<h2> restful - REST APIs made easy</h2>
+
+<blockquote>
+<br>&nbsp;<br><h3><a name=abstract class=none>Abstract</a></h3>
+
+<p>
+The code is licensed under
+the <a href="http://opensource.org/licenses/MIT">MIT license</a>.
+</p>
+
+<p>
+<font color=red>Installation shortcut:</font> <code>(ql:quickload :restful)</code>
+</p>
+</blockquote>
+
+<br>&nbsp;<br><h3><a class=none name="contents">Contents</a></h3>
+<ol>
+  <li><a href="#example">A basic example</a>
+  <li><a href="#dictionary">The restful dictionary</a>
+    <ol>
+      <li><a href="#acceptor"><code>acceptor</code></a>
+      <li><a href="#collection"><code>collection</code></a>
+      <li><a href="#create-resource"><code>create-resource</code></a>
+      <li><a href="#delete-item"><code>delete-item</code></a>
+      <li><a href="#delete-resource"><code>delete-resource</code></a>
+      <li><a href="#get-item"><code>get-item</code></a>
+      <li><a href="#get-items"><code>get-items</code></a>
+      <li><a href="#has-permission"><code>has-permission</code></a>
+      <li><a href="#load-resource"><code>load-resource</code></a>
+      <li><a href="#memory-storage"><code>memory-storage</code></a>
+      <li><a href="#parent"><code>parent</code></a>
+      <li><a href="#patch-resource"><code>patch-resource</code></a>
+      <li><a href="#replace-resource"><code>replace-resource</code></a>
+      <li><a href="#resource"><code>resource</code></a>
+      <li><a href="#resource-action"><code>resource-action</code></a>
+      <li><a href="#resource-metaclass"><code>resource-metaclass</code></a>
+      <li><a href="#save-item"><code>save-item</code></a>
+      <li><a href="#storage"><code>storage</code></a>
+      <li><a href="#storage"><code>storage</code></a>
+      <li><a href="#view-collection"><code>view-collection</code></a>
+      <li><a href="#view-resource"><code>view-resource</code></a>
+    </ol>
+  <li><a href="#ack">Acknowledgements</a>
+</ol>
+
+<br>&nbsp;<br><h3><a class=none name="example">A basic example</a></h3>
+
+<!-- A basic example -->
+
+
+<!-- End of basic example -->
+
+<br>&nbsp;<br><h3><a class=none name="dictionary">The restful dictionary</a></h3>
+
+
+
+<!-- Entry for ACCEPTOR -->
+
+<p><br>[Standard class]<br><a class=none name='acceptor'><b>acceptor</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for ACCEPTOR -->
+
+
+<!-- Entry for COLLECTION -->
+
+<p><br>[Standard class]<br><a class=none name='collection'><b>collection</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for COLLECTION -->
+
+
+<!-- Entry for CREATE-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='create-resource'><b>create-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function creates a new resource.
+
+</blockquote>
+
+<!-- End of entry for CREATE-RESOURCE -->
+
+
+<!-- Entry for CREATE-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>create-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for CREATE-RESOURCE -->
+
+
+<!-- Entry for DELETE-ITEM -->
+
+<p><br>[Generic function]<br><a class=none name='delete-item'><b>delete-item</b> <i>storage identifier</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Deletes a single item in the storage.
+
+</blockquote>
+
+<!-- End of entry for DELETE-ITEM -->
+
+
+<!-- Entry for DELETE-ITEM -->
+
+<p><br>[Method]<br><a class=none><b>delete-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for DELETE-ITEM -->
+
+
+<!-- Entry for DELETE-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='delete-resource'><b>delete-resource</b> <i>resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function deletes an existing resource.
+
+</blockquote>
+
+<!-- End of entry for DELETE-RESOURCE -->
+
+
+<!-- Entry for DELETE-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>delete-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for DELETE-RESOURCE -->
+
+
+<!-- Entry for GET-ITEM -->
+
+<p><br>[Generic function]<br><a class=none name='get-item'><b>get-item</b> <i>storage identifier</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Gets a single item in the storage.
+
+</blockquote>
+
+<!-- End of entry for GET-ITEM -->
+
+
+<!-- Entry for GET-ITEM -->
+
+<p><br>[Method]<br><a class=none><b>get-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for GET-ITEM -->
+
+
+<!-- Entry for GET-ITEMS -->
+
+<p><br>[Generic function]<br><a class=none name='get-items'><b>get-items</b> <i>storage</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Returns all the items in the storage.
+
+</blockquote>
+
+<!-- End of entry for GET-ITEMS -->
+
+
+<!-- Entry for GET-ITEMS -->
+
+<p><br>[Method]<br><a class=none><b>get-items</b> <i>(storage memory-storage)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for GET-ITEMS -->
+
+
+<!-- Entry for HAS-PERMISSION -->
+
+<p><br>[Generic function]<br><a class=none name='has-permission'><b>has-permission</b> <i>resource method</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function determines if the request has permission to
+hit the resource.
+
+</blockquote>
+
+<!-- End of entry for HAS-PERMISSION -->
+
+
+<!-- Entry for HAS-PERMISSION -->
+
+<p><br>[Method]<br><a class=none><b>has-permission</b> <i>(resource resource) method</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for HAS-PERMISSION -->
+
+
+<!-- Entry for LOAD-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='load-resource'><b>load-resource</b> <i>resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function loads a resource based on its identifier.
+
+</blockquote>
+
+<!-- End of entry for LOAD-RESOURCE -->
+
+
+<!-- Entry for LOAD-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>load-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for LOAD-RESOURCE -->
+
+
+<!-- Entry for MEMORY-STORAGE -->
+
+<p><br>[Standard class]<br><a class=none name='memory-storage'><b>memory-storage</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for MEMORY-STORAGE -->
+
+
+<!-- Entry for PARENT -->
+
+<p><br>[Generic function]<br><a class=none name='parent'><b>parent</b> <i>object</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for PARENT -->
+
+
+<!-- Entry for PARENT -->
+
+<p><br>[Method]<br><a class=none><b>parent</b> <i>(object collection)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+automatically generated reader method
+
+</blockquote>
+
+<!-- End of entry for PARENT -->
+
+
+<!-- Entry for PATCH-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='patch-resource'><b>patch-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function patches an existing resource.
+
+</blockquote>
+
+<!-- End of entry for PATCH-RESOURCE -->
+
+
+<!-- Entry for PATCH-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>patch-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for PATCH-RESOURCE -->
+
+
+<!-- Entry for REPLACE-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='replace-resource'><b>replace-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function replaces a resource.
+
+</blockquote>
+
+<!-- End of entry for REPLACE-RESOURCE -->
+
+
+<!-- Entry for REPLACE-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>replace-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for REPLACE-RESOURCE -->
+
+
+<!-- Entry for RESOURCE -->
+
+<p><br>[Standard class]<br><a class=none name='resource'><b>resource</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for RESOURCE -->
+
+
+<!-- Entry for RESOURCE-ACTION -->
+
+<p><br>[Generic function]<br><a class=none name='resource-action'><b>resource-action</b> <i>resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function lets you handle actions on the resource.
+The :identifier slot lets you know which action is called.
+
+</blockquote>
+
+<!-- End of entry for RESOURCE-ACTION -->
+
+
+<!-- Entry for RESOURCE-ACTION -->
+
+<p><br>[Method]<br><a class=none><b>resource-action</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for RESOURCE-ACTION -->
+
+
+<!-- Entry for RESOURCE-METACLASS -->
+
+<p><br>[Standard class]<br><a class=none name='resource-metaclass'><b>resource-metaclass</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for RESOURCE-METACLASS -->
+
+
+<!-- Entry for SAVE-ITEM -->
+
+<p><br>[Generic function]<br><a class=none name='save-item'><b>save-item</b> <i>storage resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+Saves an item in the storage, creating it if needed.
+
+</blockquote>
+
+<!-- End of entry for SAVE-ITEM -->
+
+
+<!-- Entry for SAVE-ITEM -->
+
+<p><br>[Method]<br><a class=none><b>save-item</b> <i>(storage memory-storage) resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for SAVE-ITEM -->
+
+
+<!-- Entry for STORAGE -->
+
+<p><br>[Standard class]<br><a class=none name='storage'><b>storage</b></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for STORAGE -->
+
+
+<!-- Entry for STORAGE -->
+
+<p><br>[Generic function]<br><a class=none name='storage'><b>storage</b> <i>object</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for STORAGE -->
+
+
+<!-- Entry for STORAGE -->
+
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object collection)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+automatically generated reader method
+
+</blockquote>
+
+<!-- End of entry for STORAGE -->
+
+
+<!-- Entry for STORAGE -->
+
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+automatically generated reader method
+
+</blockquote>
+
+<!-- End of entry for STORAGE -->
+
+
+<!-- Entry for STORAGE -->
+
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+automatically generated reader method
+
+</blockquote>
+
+<!-- End of entry for STORAGE -->
+
+
+<!-- Entry for VIEW-COLLECTION -->
+
+<p><br>[Generic function]<br><a class=none name='view-collection'><b>view-collection</b> <i>collection</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function should return an object that will be
+serialized to json using the jonathan library.
+
+</blockquote>
+
+<!-- End of entry for VIEW-COLLECTION -->
+
+
+<!-- Entry for VIEW-COLLECTION -->
+
+<p><br>[Method]<br><a class=none><b>view-collection</b> <i>(collection collection)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for VIEW-COLLECTION -->
+
+
+<!-- Entry for VIEW-RESOURCE -->
+
+<p><br>[Generic function]<br><a class=none name='view-resource'><b>view-resource</b> <i>resource</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+This function should return an object that will be
+serialized to json using the jonathan library.
+
+</blockquote>
+
+<!-- End of entry for VIEW-RESOURCE -->
+
+
+<!-- Entry for VIEW-RESOURCE -->
+
+<p><br>[Method]<br><a class=none><b>view-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
+<blockquote><br>
+
+
+
+</blockquote>
+
+<!-- End of entry for VIEW-RESOURCE -->
+
+
+<br>&nbsp;<br><h3><a class=none name="ack">Acknowledgements</a></h3>
+
+<p>
+This documentation was prepared with <a href="http://weitz.de/documentation-template/">DOCUMENTATION-TEMPLATE</a>.
+</p>
+
+</body>
+</html>

@@ -20,10 +20,14 @@
    :delete-resource
    :has-permission
    :resource-action
+   :parent
+   :storage
 
    ;; collection's methods
    :view-collection
 
    ;; storage's methods
+   :get-items
    :get-item
-   :delete-item))
+   :delete-item
+   :save-item))
