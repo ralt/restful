@@ -15,4 +15,13 @@
 
 (defmethod save-item ((storage memory-storage) resource)
   (let ((result (view-resource resource)))
-    (setf (gethash (getf result :identifier) (storage storage)) result)))
+    (setf (gethash (getf
+                    result
+                    (normalize-keyword
+                     (intern
+                      (symbol-name
+                       (find-identifier-slot
+                        (class-name (class-of resource))))
+                      :keyword)))
+                   (storage storage))
+          result)))
