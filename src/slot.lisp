@@ -20,12 +20,9 @@
 (defun populate-slot (resource filler)
   (let ()
     (lambda (slot)
-      (let ((filler-value))
-        (handler-case
-            (setf filler-value (getf filler (intern (string-upcase (symbol-name slot))
-                                                    :keyword)))
-          (simple-type-error ()
-            (setf filler-value (slot-default-value resource slot))))
+      (let ((filler-value (or (getf filler (intern (string-upcase (symbol-name slot))
+                                                   :keyword))
+                              (slot-default-value resource slot))))
         (if (and (slot-is-required resource slot) (not filler-value))
             (error 'request-data-missing)
             (setf (slot-value resource slot) filler-value))))))
@@ -43,6 +40,8 @@
                               (when (eq (closer-mop:slot-definition-name slot-definition) slot)
                                 (slot-value slot-definition 'default)))
                           (closer-mop:class-slots (class-of resource)))))
+    (unless slot-definition
+      (error 'request-data-missing))
     (let ((default-value (slot-value slot-definition 'default)))
       (unless default-value
         (error 'request-data-missing))
