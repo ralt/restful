@@ -88,7 +88,7 @@ A basic example.
 <!-- Entry for ACCEPTOR -->
 
 <p><br>[Standard class]<br><a class=none name='acceptor'><b>acceptor</b></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -100,7 +100,7 @@ A basic example.
 <!-- Entry for COLLECTION -->
 
 <p><br>[Standard class]<br><a class=none name='collection'><b>collection</b></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -112,9 +112,9 @@ A basic example.
 <!-- Entry for CREATE-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='create-resource'><b>create-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function creates a new resource.
+<p>This function creates a new resource. </p>
 
 </blockquote>
 
@@ -124,7 +124,7 @@ This function creates a new resource.
 <!-- Entry for CREATE-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>create-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -136,9 +136,9 @@ This function creates a new resource.
 <!-- Entry for DELETE-ITEM -->
 
 <p><br>[Generic function]<br><a class=none name='delete-item'><b>delete-item</b> <i>storage identifier</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Deletes a single item in the storage.
+<p>Deletes a single item in the storage. </p>
 
 </blockquote>
 
@@ -148,10 +148,9 @@ Deletes a single item in the storage.
 <!-- Entry for DELETE-ITEM -->
 
 <p><br>[Method]<br><a class=none><b>delete-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Deletes the item from the hash table. The identifier
-must be a string.
+<p>Deletes the item from the hash table. The identifier must be a string. </p>
 
 </blockquote>
 
@@ -161,9 +160,9 @@ must be a string.
 <!-- Entry for DELETE-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='delete-resource'><b>delete-resource</b> <i>resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function deletes an existing resource.
+<p>This function deletes an existing resource. </p>
 
 </blockquote>
 
@@ -173,7 +172,7 @@ This function deletes an existing resource.
 <!-- Entry for DELETE-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>delete-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -185,9 +184,9 @@ This function deletes an existing resource.
 <!-- Entry for GET-ITEM -->
 
 <p><br>[Generic function]<br><a class=none name='get-item'><b>get-item</b> <i>storage identifier</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Gets a single item in the storage. Returns a plist.
+<p>Gets a single item in the storage. Returns a plist. </p>
 
 </blockquote>
 
@@ -197,10 +196,9 @@ Gets a single item in the storage. Returns a plist.
 <!-- Entry for GET-ITEM -->
 
 <p><br>[Method]<br><a class=none><b>get-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Gets a single item according to its identifier. The
-identifier must be a string.
+<p>Gets a single item according to its identifier. The identifier must be a string. </p>
 
 </blockquote>
 
@@ -210,14 +208,9 @@ identifier must be a string.
 <!-- Entry for GET-ITEMS -->
 
 <p><br>[Generic function]<br><a class=none name='get-items'><b>get-items</b> <i>storage</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Gets all the items available in the storage.
-
-This should be overridden for a specific storage if sorting/filtering
-options wants to be added.
-
-Returns a list of plists.
+<p>Gets all the items available in the storage. </p><p>This should be overridden for a specific storage if sorting/filtering options wants to be added. </p><p>Returns a list of plists. </p>
 
 </blockquote>
 
@@ -227,9 +220,9 @@ Returns a list of plists.
 <!-- Entry for GET-ITEMS -->
 
 <p><br>[Method]<br><a class=none><b>get-items</b> <i>(storage memory-storage)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Gets all the items stored in the current instance.
+<p>Gets all the items stored in the current instance. </p>
 
 </blockquote>
 
@@ -239,10 +232,9 @@ Gets all the items stored in the current instance.
 <!-- Entry for HAS-PERMISSION -->
 
 <p><br>[Generic function]<br><a class=none name='has-permission'><b>has-permission</b> <i>resource method</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function determines if the request has permission to
-hit the resource.
+<p>This function determines if the request has permission to hit the resource. </p>
 
 </blockquote>
 
@@ -252,7 +244,7 @@ hit the resource.
 <!-- Entry for HAS-PERMISSION -->
 
 <p><br>[Method]<br><a class=none><b>has-permission</b> <i>(resource resource) method</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -264,9 +256,9 @@ hit the resource.
 <!-- Entry for LOAD-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='load-resource'><b>load-resource</b> <i>resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function loads a resource based on its identifier.
+<p>This function loads a resource based on its identifier. </p>
 
 </blockquote>
 
@@ -276,7 +268,7 @@ This function loads a resource based on its identifier.
 <!-- Entry for LOAD-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>load-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -288,15 +280,9 @@ This function loads a resource based on its identifier.
 <!-- Entry for MEMORY-STORAGE -->
 
 <p><br>[Standard class]<br><a class=none name='memory-storage'><b>memory-storage</b></a>
-<blockquote><br>
+<blockquote>
 
-Restful&#039;s storage by storing the data in memory.
-
-This is of course not very good for persistence matters (duh), but is
-perfect for development, and simply to show how a storage class
-can be built.
-
-This storage just uses a hash-table stored in a slot.
+<p>Restful's storage by storing the data in memory. </p><p>This is of course not very good for persistence matters (duh), but is perfect for development, and simply to show how a storage class can be built. </p><p>This storage just uses a hash-table stored in a slot. </p>
 
 </blockquote>
 
@@ -306,7 +292,7 @@ This storage just uses a hash-table stored in a slot.
 <!-- Entry for PARENT -->
 
 <p><br>[Generic function]<br><a class=none name='parent'><b>parent</b> <i>object</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -318,9 +304,9 @@ This storage just uses a hash-table stored in a slot.
 <!-- Entry for PARENT -->
 
 <p><br>[Method]<br><a class=none><b>parent</b> <i>(object collection)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-automatically generated reader method
+<p>automatically generated reader method </p>
 
 </blockquote>
 
@@ -330,9 +316,9 @@ automatically generated reader method
 <!-- Entry for PATCH-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='patch-resource'><b>patch-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function patches an existing resource.
+<p>This function patches an existing resource. </p>
 
 </blockquote>
 
@@ -342,7 +328,7 @@ This function patches an existing resource.
 <!-- Entry for PATCH-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>patch-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -354,18 +340,9 @@ This function patches an existing resource.
 <!-- Entry for PERMISSION-REJECTED -->
 
 <p><br>[Condition type]<br><a class=none name='permission-rejected'><b>permission-rejected</b></a>
-<blockquote><br>
+<blockquote>
 
-Raised when a request doesn&#039;t have access to the
-requested resource.
-
-This error is raised when the has-permission method of a resource
-returns NIL.
-
-When this error is handled, the response will have the 403 status
-code.
-
-This error can be raised with every method.
+<p>Raised when a request doesn't have access to the requested resource. </p><p>This error is raised when the has-permission method of a resource returns NIL. </p><p>When this error is handled, the response will have the 403 status code. </p><p>This error can be raised with every method. </p>
 
 </blockquote>
 
@@ -375,9 +352,9 @@ This error can be raised with every method.
 <!-- Entry for REPLACE-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='replace-resource'><b>replace-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function replaces a resource.
+<p>This function replaces a resource. </p>
 
 </blockquote>
 
@@ -387,7 +364,7 @@ This function replaces a resource.
 <!-- Entry for REPLACE-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>replace-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -399,27 +376,12 @@ This function replaces a resource.
 <!-- Entry for REQUEST-DATA-MISSING -->
 
 <p><br>[Condition type]<br><a class=none name='request-data-missing'><b>request-data-missing</b></a>
-<blockquote><br>
+<blockquote>
 
-Raised when a request body doesn&#039;t fulfill the
-resource&#039;s schema.
-
-For example, if a resource is the following:
-
-(defclass foo (restful:resource)
-  ((id :is-identifier t)
-   (name :required t)))
-
-And the request body is the following:
-
-{&quot;id&quot;:&quot;bar&quot;}
-
-This error will be raised.
-
-When this error is handled, the response will have a 400 status
-code.
-
-This error can be raised in the following requests: PUT, POST.
+<p>Raised when a request body doesn't fulfill the resource's schema. </p><p>For example, if a resource is the following: </p><pre><code>(defclass foo (restful:resource)  
+  ((id :is-identifier t)  
+   (name :required t))  
+  (:metaclass restful:resource-metaclass)) </code></pre><p>And the request body is the following: </p><pre><code>{"id":"bar"} </code></pre><p>This error will be raised. </p><p>When this error is handled, the response will have a 400 status code. </p><p>This error can be raised in the following requests: PUT, POST. </p>
 
 </blockquote>
 
@@ -429,7 +391,7 @@ This error can be raised in the following requests: PUT, POST.
 <!-- Entry for RESOURCE -->
 
 <p><br>[Standard class]<br><a class=none name='resource'><b>resource</b></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -441,10 +403,9 @@ This error can be raised in the following requests: PUT, POST.
 <!-- Entry for RESOURCE-ACTION -->
 
 <p><br>[Generic function]<br><a class=none name='resource-action'><b>resource-action</b> <i>resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function lets you handle actions on the resource.
-The :identifier slot lets you know which action is called.
+<p>This function lets you handle actions on the resource. The :identifier slot lets you know which action is called. </p>
 
 </blockquote>
 
@@ -454,7 +415,7 @@ The :identifier slot lets you know which action is called.
 <!-- Entry for RESOURCE-ACTION -->
 
 <p><br>[Method]<br><a class=none><b>resource-action</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -466,7 +427,7 @@ The :identifier slot lets you know which action is called.
 <!-- Entry for RESOURCE-METACLASS -->
 
 <p><br>[Standard class]<br><a class=none name='resource-metaclass'><b>resource-metaclass</b></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -478,15 +439,9 @@ The :identifier slot lets you know which action is called.
 <!-- Entry for RESOURCE-NOT-FOUND-ERROR -->
 
 <p><br>[Condition type]<br><a class=none name='resource-not-found-error'><b>resource-not-found-error</b></a>
-<blockquote><br>
+<blockquote>
 
-Raised when a request resource is not found.
-
-When this error is handled, the response will have the 404 status
-code.
-
-This error can be raised in the following requests: GET, PATCH,
-DELETE, POST.
+<p>Raised when a request resource is not found. </p><p>When this error is handled, the response will have the 404 status code. </p><p>This error can be raised in the following requests: GET, PATCH, DELETE, POST. </p>
 
 </blockquote>
 
@@ -496,14 +451,9 @@ DELETE, POST.
 <!-- Entry for SAVE-ITEM -->
 
 <p><br>[Generic function]<br><a class=none name='save-item'><b>save-item</b> <i>storage resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Saves an item in the storage, creating it if needed.
-
-Since resources are created or updated with PUT requests, as long as you
-have an ID, a resource exists. Except if the user doesn&#039;t have permission
-to PUT non-existing resources, but that&#039;s handled at the application level,
-not at the storage level, which only cares that a resource has an identifier.
+<p>Saves an item in the storage, creating it if needed. </p><p>Since resources are created or updated with PUT requests, as long as you have an ID, a resource exists. Except if the user doesn't have permission to PUT non-existing resources, but that's handled at the application level, not at the storage level, which only cares that a resource has an identifier. </p>
 
 </blockquote>
 
@@ -513,11 +463,9 @@ not at the storage level, which only cares that a resource has an identifier.
 <!-- Entry for SAVE-ITEM -->
 
 <p><br>[Method]<br><a class=none><b>save-item</b> <i>(storage memory-storage) resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-Saves or updates an item in the hash table. Since
-(setf (gethash [...])) is used, the &#039;save or update&#039;
-feature is very simply done.
+<p>Saves or updates an item in the hash table. Since <code>(setf (gethash [...]))</code> is used, the 'save or update' feature is very simply done. </p>
 
 </blockquote>
 
@@ -527,7 +475,7 @@ feature is very simply done.
 <!-- Entry for STORAGE -->
 
 <p><br>[Generic function]<br><a class=none name='storage'><b>storage</b> <i>object</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -539,10 +487,9 @@ feature is very simply done.
 <!-- Entry for STORAGE -->
 
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-The hash table used to store the items
-in memory.
+<p>The hash table used to store the items in memory. </p>
 
 </blockquote>
 
@@ -552,9 +499,9 @@ in memory.
 <!-- Entry for STORAGE -->
 
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object collection)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-automatically generated reader method
+<p>automatically generated reader method </p>
 
 </blockquote>
 
@@ -564,9 +511,9 @@ automatically generated reader method
 <!-- Entry for STORAGE -->
 
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-automatically generated reader method
+<p>automatically generated reader method </p>
 
 </blockquote>
 
@@ -576,10 +523,9 @@ automatically generated reader method
 <!-- Entry for VIEW-COLLECTION -->
 
 <p><br>[Generic function]<br><a class=none name='view-collection'><b>view-collection</b> <i>collection</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function should return an object that will be
-serialized to json using the jonathan library.
+<p>This function should return an object that will be serialized to json using the jonathan library. </p>
 
 </blockquote>
 
@@ -589,7 +535,7 @@ serialized to json using the jonathan library.
 <!-- Entry for VIEW-COLLECTION -->
 
 <p><br>[Method]<br><a class=none><b>view-collection</b> <i>(collection collection)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 
@@ -601,10 +547,9 @@ serialized to json using the jonathan library.
 <!-- Entry for VIEW-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='view-resource'><b>view-resource</b> <i>resource</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
-This function should return an object that will be
-serialized to json using the jonathan library.
+<p>This function should return an object that will be serialized to json using the jonathan library. </p>
 
 </blockquote>
 
@@ -614,7 +559,7 @@ serialized to json using the jonathan library.
 <!-- Entry for VIEW-RESOURCE -->
 
 <p><br>[Method]<br><a class=none><b>view-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
+<blockquote>
 
 
 

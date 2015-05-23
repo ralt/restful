@@ -29,7 +29,7 @@ must be a string."
 
 (defmethod save-item ((storage memory-storage) resource)
   "Saves or updates an item in the hash table. Since
-\(setf (gethash [...])) is used, the 'save or update'
+`(setf (gethash [...]))` is used, the 'save or update'
 feature is very simply done."
   (let ((result (view-resource resource)))
     (setf (gethash (getf

@@ -16,13 +16,14 @@ resource's schema.
 
 For example, if a resource is the following:
 
-\(defclass foo (restful:resource)
-  ((id :is-identifier t)
-   (name :required t)))
+    (defclass foo (restful:resource)
+      ((id :is-identifier t)
+       (name :required t))
+      (:metaclass restful:resource-metaclass))
 
 And the request body is the following:
 
-{\"id\":\"bar\"}
+    {\"id\":\"bar\"}
 
 This error will be raised.
 
