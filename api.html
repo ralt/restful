@@ -66,7 +66,6 @@ the <a href="http://opensource.org/licenses/MIT">MIT license</a>.
       <li><a href="#resource-not-found-error"><code>resource-not-found-error</code></a>
       <li><a href="#save-item"><code>save-item</code></a>
       <li><a href="#storage"><code>storage</code></a>
-      <li><a href="#storage"><code>storage</code></a>
       <li><a href="#view-collection"><code>view-collection</code></a>
       <li><a href="#view-resource"><code>view-resource</code></a>
     </ol>
@@ -151,7 +150,8 @@ Deletes a single item in the storage.
 <p><br>[Method]<br><a class=none><b>delete-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
+Deletes the item from the hash table. The identifier
+must be a string.
 
 </blockquote>
 
@@ -187,7 +187,7 @@ This function deletes an existing resource.
 <p><br>[Generic function]<br><a class=none name='get-item'><b>get-item</b> <i>storage identifier</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-Gets a single item in the storage.
+Gets a single item in the storage. Returns a plist.
 
 </blockquote>
 
@@ -199,7 +199,8 @@ Gets a single item in the storage.
 <p><br>[Method]<br><a class=none><b>get-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
+Gets a single item according to its identifier. The
+identifier must be a string.
 
 </blockquote>
 
@@ -211,7 +212,12 @@ Gets a single item in the storage.
 <p><br>[Generic function]<br><a class=none name='get-items'><b>get-items</b> <i>storage</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-Returns all the items in the storage.
+Gets all the items available in the storage.
+
+This should be overridden for a specific storage if sorting/filtering
+options wants to be added.
+
+Returns a list of plists.
 
 </blockquote>
 
@@ -223,7 +229,7 @@ Returns all the items in the storage.
 <p><br>[Method]<br><a class=none><b>get-items</b> <i>(storage memory-storage)</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
+Gets all the items stored in the current instance.
 
 </blockquote>
 
@@ -284,7 +290,13 @@ This function loads a resource based on its identifier.
 <p><br>[Standard class]<br><a class=none name='memory-storage'><b>memory-storage</b></a>
 <blockquote><br>
 
+Restful&#039;s storage by storing the data in memory.
 
+This is of course not very good for persistence matters (duh), but is
+perfect for development, and simply to show how a storage class
+can be built.
+
+This storage just uses a hash-table stored in a slot.
 
 </blockquote>
 
@@ -488,6 +500,11 @@ DELETE, POST.
 
 Saves an item in the storage, creating it if needed.
 
+Since resources are created or updated with PUT requests, as long as you
+have an ID, a resource exists. Except if the user doesn&#039;t have permission
+to PUT non-existing resources, but that&#039;s handled at the application level,
+not at the storage level, which only cares that a resource has an identifier.
+
 </blockquote>
 
 <!-- End of entry for SAVE-ITEM -->
@@ -498,7 +515,9 @@ Saves an item in the storage, creating it if needed.
 <p><br>[Method]<br><a class=none><b>save-item</b> <i>(storage memory-storage) resource</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
+Saves or updates an item in the hash table. Since
+(setf (gethash [...])) is used, the &#039;save or update&#039;
+feature is very simply done.
 
 </blockquote>
 
@@ -507,7 +526,7 @@ Saves an item in the storage, creating it if needed.
 
 <!-- Entry for STORAGE -->
 
-<p><br>[Standard class]<br><a class=none name='storage'><b>storage</b></a>
+<p><br>[Generic function]<br><a class=none name='storage'><b>storage</b> <i>object</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 
@@ -519,10 +538,11 @@ Saves an item in the storage, creating it if needed.
 
 <!-- Entry for STORAGE -->
 
-<p><br>[Generic function]<br><a class=none name='storage'><b>storage</b> <i>object</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
-
+The hash table used to store the items
+in memory.
 
 </blockquote>
 
@@ -544,18 +564,6 @@ automatically generated reader method
 <!-- Entry for STORAGE -->
 
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
-<blockquote><br>
-
-automatically generated reader method
-
-</blockquote>
-
-<!-- End of entry for STORAGE -->
-
-
-<!-- Entry for STORAGE -->
-
-<p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
 <blockquote><br>
 
 automatically generated reader method

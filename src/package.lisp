@@ -8,7 +8,6 @@
    :resource
    :resource-metaclass
    :collection
-   :storage
    :memory-storage
 
    ;; resource's methods
