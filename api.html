@@ -150,7 +150,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>delete-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>Deletes the item from the hash table. The identifier must be a string. </p>
+<p>Deletes the item from the hash table. The identifier is the key of the hash table. </p>
 
 </blockquote>
 
@@ -198,7 +198,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>get-item</b> <i>(storage memory-storage) identifier</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>Gets a single item according to its identifier. The identifier must be a string. </p>
+<p>Gets a single item according to its identifier. Returns a plist. The identifier is the key of the hash table. </p>
 
 </blockquote>
 
@@ -282,7 +282,7 @@ A basic example.
 <p><br>[Standard class]<br><a class=none name='memory-storage'><b>memory-storage</b></a>
 <blockquote>
 
-<p>Restful's storage by storing the data in memory. </p><p>This is of course not very good for persistence matters (duh), but is perfect for development, and simply to show how a storage class can be built. </p><p>This storage just uses a hash-table stored in a slot. </p>
+<p>Restful's storage by storing the data in memory. </p><p>This is of course not very good for persistence matters (duh), but is perfect for development, and simply to show how a storage class can be built. </p><p>This storage just uses a hash table stored in a slot. </p>
 
 </blockquote>
 

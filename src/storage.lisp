@@ -5,7 +5,7 @@
   (:documentation "Gets all the items available in the storage.
 
 This should be overridden for a specific storage if sorting/filtering
-options wants to be added.
+options want to be added.
 
 Returns a list of plists."))
 
