@@ -30,4 +30,10 @@
    :get-items
    :get-item
    :delete-item
-   :save-item))
+   :save-item
+
+   ;; conditions
+   :resource-not-found-error
+   :request-data-missing
+   :permission-rejected
+   ))

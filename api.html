@@ -57,10 +57,13 @@ the <a href="http://opensource.org/licenses/MIT">MIT license</a>.
       <li><a href="#memory-storage"><code>memory-storage</code></a>
       <li><a href="#parent"><code>parent</code></a>
       <li><a href="#patch-resource"><code>patch-resource</code></a>
+      <li><a href="#permission-rejected"><code>permission-rejected</code></a>
       <li><a href="#replace-resource"><code>replace-resource</code></a>
+      <li><a href="#request-data-missing"><code>request-data-missing</code></a>
       <li><a href="#resource"><code>resource</code></a>
       <li><a href="#resource-action"><code>resource-action</code></a>
       <li><a href="#resource-metaclass"><code>resource-metaclass</code></a>
+      <li><a href="#resource-not-found-error"><code>resource-not-found-error</code></a>
       <li><a href="#save-item"><code>save-item</code></a>
       <li><a href="#storage"><code>storage</code></a>
       <li><a href="#storage"><code>storage</code></a>
@@ -336,6 +339,27 @@ This function patches an existing resource.
 <!-- End of entry for PATCH-RESOURCE -->
 
 
+<!-- Entry for PERMISSION-REJECTED -->
+
+<p><br>[Condition type]<br><a class=none name='permission-rejected'><b>permission-rejected</b></a>
+<blockquote><br>
+
+Raised when a request doesn&#039;t have access to the
+requested resource.
+
+This error is raised when the has-permission method of a resource
+returns NIL.
+
+When this error is handled, the response will have the 403 status
+code.
+
+This error can be raised with every method.
+
+</blockquote>
+
+<!-- End of entry for PERMISSION-REJECTED -->
+
+
 <!-- Entry for REPLACE-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='replace-resource'><b>replace-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
@@ -358,6 +382,36 @@ This function replaces a resource.
 </blockquote>
 
 <!-- End of entry for REPLACE-RESOURCE -->
+
+
+<!-- Entry for REQUEST-DATA-MISSING -->
+
+<p><br>[Condition type]<br><a class=none name='request-data-missing'><b>request-data-missing</b></a>
+<blockquote><br>
+
+Raised when a request body doesn&#039;t fulfill the
+resource&#039;s schema.
+
+For example, if a resource is the following:
+
+(defclass foo (restful:resource)
+  ((id :is-identifier t)
+   (name :required t)))
+
+And the request body is the following:
+
+{&quot;id&quot;:&quot;bar&quot;}
+
+This error will be raised.
+
+When this error is handled, the response will have a 400 status
+code.
+
+This error can be raised in the following requests: PUT, POST.
+
+</blockquote>
+
+<!-- End of entry for REQUEST-DATA-MISSING -->
 
 
 <!-- Entry for RESOURCE -->
@@ -407,6 +461,24 @@ The :identifier slot lets you know which action is called.
 </blockquote>
 
 <!-- End of entry for RESOURCE-METACLASS -->
+
+
+<!-- Entry for RESOURCE-NOT-FOUND-ERROR -->
+
+<p><br>[Condition type]<br><a class=none name='resource-not-found-error'><b>resource-not-found-error</b></a>
+<blockquote><br>
+
+Raised when a request resource is not found.
+
+When this error is handled, the response will have the 404 status
+code.
+
+This error can be raised in the following requests: GET, PATCH,
+DELETE, POST.
+
+</blockquote>
+
+<!-- End of entry for RESOURCE-NOT-FOUND-ERROR -->
 
 
 <!-- Entry for SAVE-ITEM -->
