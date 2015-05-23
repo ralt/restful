@@ -1,7 +1,22 @@
 (in-package #:restful)
 
 
-(defclass resource-metaclass (standard-class) ())
+(defclass resource-metaclass (standard-class) ()
+  (:documentation "The metaclass for resources, required to be
+used by all the resources.
+
+This metaclass allows resources to use new slot options:
+
+- `is-identifier`: defaults to NIL. Only one slot per resource
+should set this option to T. It will make the slot the identifier
+of the resource. The identifier is used to find the resource in
+the API. When set to T, the slot option `required` is implicitly
+set to T too.
+- `required`: defaults to NIL. When set to T, this slot will
+be required in the API requests.
+- `default`: defaults to `\"\"`. If the slot is not required,
+this value will be used to fill in the slot value if no value
+is provided."))
 
 (defclass resource-standard-direct-slot-definition (closer-mop:standard-direct-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)
