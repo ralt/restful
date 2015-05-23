@@ -2,6 +2,8 @@
 
 Spin up new REST entities like madman
 
+Documentation available [here][0].
+
 ## Roadmap
 
 - Write extensive documentation
@@ -21,3 +23,6 @@ Generate documentation using https://github.com/Ralt/documentation-template:
   :subtitle "REST APIs made easy"
   :example (alexandria:read-file-into-string "example.html"))
 ```
+
+
+  [0]: http://rawgit.com/Ralt/restful/master/api.html
