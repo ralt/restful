@@ -30,7 +30,8 @@ The following dependencies are used internally:
 
 ## Roadmap
 
-- Define a postgresql storage
+- Add HATEOAS support through the `Link` response header
+- Define a mongodb/postgresql storage
 - Add POST handling on collections (create resources, custom actions)
 
 
