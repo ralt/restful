@@ -28,7 +28,6 @@ The following dependencies are used internally:
 
 ## Roadmap
 
-- Add a :exclude option
 - Define a postgresql storage
 - Add POST handling on collections (create resources, custom actions)
 

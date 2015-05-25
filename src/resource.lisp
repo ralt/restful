@@ -3,13 +3,13 @@
 
 (defclass resource ()
   ((parent
-    :initarg :parent :type resource
+    :initarg :parent :type resource :reader parent :excluded t
     :documentation "Stores the parent of the resource in case of
 hierarchy. For example, if hitting foo/bar/baz/qux, the resource
 with identifier 'qux' will have 'bar' as parent. If there's no
 parent, its value is NIL.")
    (storage
-    :initarg :storage :type storage :reader storage
+    :initarg :storage :type storage :reader storage :excluded t
     :documentation "The storage object that satisfies the interface
 of the `restful:storage` class."))
   (:metaclass resource-metaclass)

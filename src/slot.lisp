@@ -53,8 +53,9 @@
                        (string< (cdr a) (cdr b))))))
 
 (defun get-resource-slots (resource)
-  (remove-if #'(lambda (slot)
-                 (or (eq slot 'parent)
-                     (eq slot 'storage)))
-             (mapcar #'closer-mop:slot-definition-name
+  (mapcar #'closer-mop:slot-definition-name
+          (remove-if #'is-slot-excluded
                      (closer-mop:class-slots (class-of resource)))))
+
+(defun is-slot-excluded (slot)
+  (slot-value slot 'excluded))

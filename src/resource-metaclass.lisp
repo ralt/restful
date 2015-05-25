@@ -16,17 +16,21 @@ set to T too.
 be required in the API requests.
 - `default`: defaults to `\"\"`. If the slot is not required,
 this value will be used to fill in the slot value if no value
-is provided."))
+is provided.
+- `excluded`: defaults to NIL. When to set T, this slot will be
+ignored for the resource's CRUD actions."))
 
 (defclass resource-standard-direct-slot-definition (closer-mop:standard-direct-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)
    (required :initarg :required :initform nil)
-   (default :initarg :default :initform nil)))
+   (default :initarg :default :initform nil)
+   (excluded :initarg :excluded :initform nil)))
 
 (defclass resource-standard-effective-slot-definition (closer-mop:standard-effective-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)
    (required :initarg :required :initform nil)
-   (default :initarg :default :initform nil)))
+   (default :initarg :default :initform nil)
+   (excluded :initarg :excluded :initform nil)))
 
 (defmethod closer-mop:direct-slot-definition-class ((class resource-metaclass) &rest initargs)
   (declare (ignore initargs))
@@ -48,9 +52,7 @@ is provided."))
   (let ((effective-slotd (call-next-method)))
     (dolist (slotd direct-slot-definitions)
       (when (typep slotd 'resource-standard-direct-slot-definition)
-        (setf
-         (slot-value effective-slotd 'is-identifier) (slot-value slotd 'is-identifier)
-         (slot-value effective-slotd 'required) (slot-value slotd 'required)
-         (slot-value effective-slotd 'default) (slot-value slotd 'default))
+        (dolist (sym '(is-identifier required default excluded))
+          (setf (slot-value effective-slotd sym) (slot-value slotd sym)))
         (return)))
     effective-slotd))
