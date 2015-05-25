@@ -2,18 +2,19 @@
 
 
 (defclass resource ()
-  ((parent :initarg :parent :type resource)
-   (storage :initarg :storage :type storage :reader storage))
+  ((parent
+    :initarg :parent :type resource
+    :documentation "Stores the parent of the resource in case of
+hierarchy. For example, if hitting foo/bar/baz/qux, the resource
+with identifier 'qux' will have 'bar' as parent. If there's no
+parent, its value is NIL.")
+   (storage
+    :initarg :storage :type storage :reader storage
+    :documentation "The storage object that satisfies the interface
+of the `restful:storage` class."))
   (:metaclass resource-metaclass)
   (:documentation "Base class for resources. All the resources
-should extend this class to have the default (required) slots:
-
-- `parent`: stores the parent of the resource in case of hierarchy.
-For example, if hitting foo/bar/baz/qux, the resource with identifier
-'qux' will have 'bar' as parent. If there's no parent, it's value
-is NIL.
-- `storage`: the storage object that satisfies the interface of the
-`restful:storage` class."))
+should extend this class to have the default (required) slots."))
 
 (defgeneric view-resource (resource)
   (:documentation "Returns an object that will be serialized

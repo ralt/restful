@@ -3,11 +3,17 @@
 
 (defclass collection ()
   ((parent :initarg :parent
-           :reader parent)
+           :reader parent
+           :documentation "The parent resource, if any. If there's no
+parent, its value is NIL.")
    (storage :initarg :storage
-            :reader storage)
-   (class-of-resource :initarg :class-of-resource
-                      :reader class-of-resource))
+            :reader storage
+            :documentation "The storage object that satisfies the
+interface of the `restful:storage` class.")
+   (class-of-resource
+    :initarg :class-of-resource
+    :reader class-of-resource
+    :documentation "The resource's class of this collection."))
   (:documentation "Base class for restful collections. There's
 not much reason to extend it with the current features."))
 

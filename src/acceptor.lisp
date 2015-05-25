@@ -2,8 +2,11 @@
 
 
 (defclass acceptor (h:acceptor)
-  ((resource-definition :initarg :resource-definition
-                        :type hash-table))
+  ((resource-definition
+    :initarg :resource-definition
+    :type hash-table
+    :documentation "The resource definition, documented in the class
+documentation."))
   (:documentation "Base class for the acceptor, subclassing
 a hunchentoot acceptor to be able to handle incoming requests.
 

@@ -395,7 +395,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Method]<br><a class=none><b>parent</b> <i>(object collection)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>automatically generated reader method </p>
+<p>The parent resource, if any. If there's no parent, its value is NIL. </p>
 
 </blockquote>
 
@@ -482,7 +482,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Standard class]<br><a class=none name='resource'><b>resource</b></a>
 <blockquote>
 
-<p>Base class for resources. All the resources should extend this class to have the default (required) slots: </p><ul><li><code>parent</code>: stores the parent of the resource in case of hierarchy. For example, if hitting foo/bar/baz/qux, the resource with identifier 'qux' will have 'bar' as parent. If there's no parent, it's value is NIL. </li><li><code>storage</code>: the storage object that satisfies the interface of the <code>restful:storage</code> class. </li></ul>
+<p>Base class for resources. All the resources should extend this class to have the default (required) slots. </p>
 
 </blockquote>
 
@@ -580,7 +580,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object collection)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>automatically generated reader method </p>
+<p>The storage object that satisfies the interface of the <code>restful:storage</code> class. </p>
 
 </blockquote>
 
@@ -592,7 +592,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>automatically generated reader method </p>
+<p>The storage object that satisfies the interface of the <code>restful:storage</code> class. </p>
 
 </blockquote>
 
