@@ -1,15 +1,30 @@
 # restful
 
-REST APIs made easy.
+JSON REST APIs made easy.
 
-In other words, spin up a fully standards-compliant<sup>1</sup> API over HTTP in
-Common Lisp by providing a simple class.
+In other words, spin up a fully standards-compliant<sup>1</sup> JSON API over HTTP
+in Common Lisp by providing a simple class.
 
 Documentation available [here][0]. <!-- FIXME -->
 
 An example of an implementation is available [here][4].
 
 <sup>1</sup> Closely follows [RFC 7230][1], [RFC 7231][2] and [RFC 5789][3].
+
+## Dependencies
+
+This library uses (and exposes its usage) the following dependencies:
+
+- [`hunchentoot`][5]: defines a new acceptor to be used with hunchentoot. restful
+also assumes that `hunchentoot` is used to handle requests/responses.
+- [`jonathan`][6]: parse/render JSON thanks to this library. A selling point
+of this library is that an object can define a method to handle its rendering.
+
+The following dependencies are used internally:
+
+- `alexandria` for the hash table facilities.
+- `cl-ppcre` for the regexes.
+- `closer-mop` to define and handle new slot options.
 
 ## Roadmap
 
