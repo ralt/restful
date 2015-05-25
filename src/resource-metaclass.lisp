@@ -18,7 +18,9 @@ be required in the API requests.
 this value will be used to fill in the slot value if no value
 is provided.
 - `excluded`: defaults to NIL. When to set T, this slot will be
-ignored for the resource's CRUD actions."))
+ignored for the resource's CRUD actions. For example, the
+`restful:resource` class uses it for its `parent` and `storage`
+slots."))
 
 (defclass resource-standard-direct-slot-definition (closer-mop:standard-direct-slot-definition)
   ((is-identifier :initarg :is-identifier :initform nil)

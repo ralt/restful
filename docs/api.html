@@ -402,6 +402,18 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <!-- End of entry for PARENT -->
 
 
+<!-- Entry for PARENT -->
+
+<p><br>[Method]<br><a class=none><b>parent</b> <i>(object resource)</i> =&gt; <i>result</i></a>
+<blockquote>
+
+<p>Stores the parent of the resource in case of hierarchy. For example, if hitting foo/bar/baz/qux, the resource with identifier 'qux' will have 'bar' as parent. If there's no parent, its value is NIL. </p>
+
+</blockquote>
+
+<!-- End of entry for PARENT -->
+
+
 <!-- Entry for PATCH-RESOURCE -->
 
 <p><br>[Generic function]<br><a class=none name='patch-resource'><b>patch-resource</b> <i>resource request-data</i> =&gt; <i>result</i></a>
@@ -520,7 +532,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Standard class]<br><a class=none name='resource-metaclass'><b>resource-metaclass</b></a>
 <blockquote>
 
-<p>The metaclass for resources, required to be used by all the resources. </p><p>This metaclass allows resources to use new slot options: </p><ul><li><code>is-identifier</code>: defaults to NIL. Only one slot per resource should set this option to T. It will make the slot the identifier of the resource. The identifier is used to find the resource in the API. When set to T, the slot option <code>required</code> is implicitly set to T too. </li><li><code>required</code>: defaults to NIL. When set to T, this slot will be required in the API requests. </li><li><code>default</code>: defaults to <code>""</code>. If the slot is not required, this value will be used to fill in the slot value if no value is provided. </li></ul>
+<p>The metaclass for resources, required to be used by all the resources. </p><p>This metaclass allows resources to use new slot options: </p><ul><li><code>is-identifier</code>: defaults to NIL. Only one slot per resource should set this option to T. It will make the slot the identifier of the resource. The identifier is used to find the resource in the API. When set to T, the slot option <code>required</code> is implicitly set to T too. </li><li><code>required</code>: defaults to NIL. When set to T, this slot will be required in the API requests. </li><li><code>default</code>: defaults to <code>""</code>. If the slot is not required, this value will be used to fill in the slot value if no value is provided. </li><li><code>excluded</code>: defaults to NIL. When to set T, this slot will be ignored for the resource's CRUD actions. For example, the <code>restful:resource</code> class uses it for its <code>parent</code> and <code>storage</code> slots. </li></ul>
 
 </blockquote>
 
