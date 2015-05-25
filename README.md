@@ -37,3 +37,5 @@ The following dependencies are used internally:
   [2]: https://tools.ietf.org/html/rfc7231
   [3]: https://tools.ietf.org/html/rfc5789
   [4]: https://github.com/Ralt/restful-blog
+  [5]: http://weitz.de/hunchentoot/
+  [6]: https://github.com/Rudolph-Miller/jonathan/
