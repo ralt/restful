@@ -506,7 +506,7 @@ CL-USER&gt; (drakma:http-request "http://localhost:4444/article/foo/comment"
 <p><br>[Generic function]<br><a class=none name='resource-action'><b>resource-action</b> <i>resource</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>Lets you handle actions on the resource. The :identifier slot lets you know which action is called. This method is called for the POST requests, and routing should be handled by yourself. Here is a typical example of what it can look like: </p><pre><code>(defmethod resource-action ((res custom-resource))  
+<p>Lets you handle actions on the resource. The :identifier slot lets you know which action is called. This method is called for the POST requests, and routing should be handled by yourself. Here is a typical example of what it can look like: </p><pre><code>(defmethod restful:resource-action ((res custom-resource))  
   (cond ((string= (identifier res) "login") #'handle-login)  
         (t (http-page-not-found)))) </code></pre>
 

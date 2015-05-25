@@ -43,7 +43,7 @@ method is called for the POST requests, and routing should
 be handled by yourself. Here is a typical example of what
 it can look like:
 
-    (defmethod resource-action ((res custom-resource))
+    (defmethod restful:resource-action ((res custom-resource))
       (cond ((string= (identifier res) \"login\") #'handle-login)
             (t (http-page-not-found))))"))
 
