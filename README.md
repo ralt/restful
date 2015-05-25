@@ -5,7 +5,7 @@ JSON REST APIs made easy.
 In other words, spin up a fully standards-compliant<sup>1</sup> JSON API over HTTP
 in Common Lisp by providing a simple class.
 
-Documentation available [here][0]. <!-- FIXME -->
+Documentation available [here][0].
 
 An example of an implementation is available [here][4].
 
@@ -32,7 +32,7 @@ The following dependencies are used internally:
 - Define a postgresql storage
 
 
-  [0]: http://rawgit.com/Ralt/restful/master/api.html
+  [0]: http://rawgit.com/Ralt/restful/master/docs/api.html
   [1]: https://tools.ietf.org/html/rfc7230
   [2]: https://tools.ietf.org/html/rfc7231
   [3]: https://tools.ietf.org/html/rfc5789
