@@ -98,7 +98,8 @@ error is raised if the resource was not found."
   (save-item (storage resource) resource))
 
 (defmethod resource-action ((resource resource))
-  "Returns a 404 Page Not Found."
+  "Returns a 404 Page Not Found. Raising a resource-not-found error
+doesn't make sense."
   (http-error h:+http-not-found+))
 
 (defmethod delete-resource ((resource resource))

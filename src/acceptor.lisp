@@ -3,9 +3,72 @@
 
 (defclass acceptor (h:acceptor)
   ((resource-definition :initarg :resource-definition
-                        :type hash-table)))
+                        :type hash-table))
+  (:documentation "Base class for the acceptor, subclassing
+a hunchentoot acceptor to be able to handle incoming requests.
+
+This class defines the following slot:
+
+- `resource-definition`: defines the list of resources and
+how to handle them. This is a hash table that must:
+    - define a string key being the prefix for the resources
+    - for each key, define a value being a hash table. This
+      hash table must:
+        - define a keyword key named `:class` being the resource
+          class.
+        - define a keyword named `:collection` being the collection
+          class.
+        - define a keyword named `:storage` being the storage instance.
+        - define a keyword named `:children` being a new resource
+          definition, if necessary.
+
+This is an example of a resource definition (assuming the readers
+macros to define hash tables using brackets):
+
+    {
+        \"article\" {
+            :class 'article
+            :collection 'restful:collection
+            :storage (make-instance 'restful:memory-storage)
+            :children {
+                \"comment\" {
+                    :class 'comment
+                    :collection 'restful:collection
+                    :storage (make-instance 'restful:memory-storage)
+                }
+            }
+        }
+    }
+
+The API will be available through the following endpoints:
+
+- `/article`: collection endpoint.
+- `/article/foo`: resource 'foo' of instance `article` endpoint.
+- `/article/foo/comment/bar`: resource 'bar' of instance `comment`,
+having for parent 'foo' of instance `article` endpoint.
+
+This class should be used to instantiate objects to be used
+with hunchentoot.
+
+Here is an example of such usage:
+
+    (hunchentoot:start
+      (make-instance 'restful:acceptor
+                     :port 4242
+                     :resource-definition *resource-definition*))"))
 
 (defmethod h:acceptor-dispatch-request ((acceptor acceptor) request)
+  "Dispatches requests to the internal handle-uri function if the
+request matches the requirements. Namely, accepting application/json.
+
+This method also defines the application/json response header.
+
+This method catches the following errors:
+
+- `resource-not-found-error`: returns a 404 page not found response.
+- `request-data-missing`: returns a 400 bad request response.
+- `permission-rejected`: returns a 403 forbidden response.
+- `error`: returns a 500 internal server error response."
   ;; Only application/json
   (unless (cl-ppcre:scan "application/json" (h:header-in* :accept))
     (return-from h:acceptor-dispatch-request

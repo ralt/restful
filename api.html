@@ -90,7 +90,23 @@ A basic example.
 <p><br>[Standard class]<br><a class=none name='acceptor'><b>acceptor</b></a>
 <blockquote>
 
-
+<p>Base class for the acceptor, subclassing a hunchentoot acceptor to be able to handle incoming requests. </p><p>This class defines the following slot: </p><ul><li><code>resource-definition</code>: defines the list of resources and how to handle them. This is a hash table that must: <ul><li>define a string key being the prefix for the resources</li><li>for each key, define a value being a hash table. This   hash table must: <ul><li>define a keyword key named <code>:class</code> being the resource   class. </li><li>define a keyword named <code>:collection</code> being the collection   class. </li><li>define a keyword named <code>:storage</code> being the storage instance.</li><li>define a keyword named <code>:children</code> being a new resource   definition, if necessary. </li></ul></li></ul></li></ul><p>This is an example of a resource definition (assuming the readers macros to define hash tables using brackets): </p><pre><code>{  
+    "article" {  
+        :class 'article  
+        :collection 'restful:collection  
+        :storage (make-instance 'restful:memory-storage)  
+        :children {  
+            "comment" {  
+                :class 'comment  
+                :collection 'restful:collection  
+                :storage (make-instance 'restful:memory-storage)  
+            }  
+        }  
+    }  
+} </code></pre><p>The API will be available through the following endpoints: </p><ul><li><code>/article</code>: collection endpoint.</li><li><code>/article/foo</code>: resource 'foo' of instance <code>article</code> endpoint.</li><li><code>/article/foo/comment/bar</code>: resource 'bar' of instance <code>comment</code>, having for parent 'foo' of instance <code>article</code> endpoint. </li></ul><p>This class should be used to instantiate objects to be used with hunchentoot. </p><p>Here is an example of such usage: </p><pre><code>(hunchentoot:start  
+  (make-instance 'restful:acceptor  
+                 :port 4242  
+                 :resource-definition *resource-definition*)) </code></pre>
 
 </blockquote>
 
@@ -419,7 +435,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>resource-action</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>Returns a 404 Page Not Found. </p>
+<p>Returns a 404 Page Not Found. Raising a resource-not-found error doesn't make sense. </p>
 
 </blockquote>
 
