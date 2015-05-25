@@ -102,7 +102,7 @@ A basic example.
 <p><br>[Standard class]<br><a class=none name='collection'><b>collection</b></a>
 <blockquote>
 
-
+<p>Base class for restful collections. There's not much reason to extend it with the current features. </p>
 
 </blockquote>
 
@@ -111,10 +111,10 @@ A basic example.
 
 <!-- Entry for CREATE-RESOURCE -->
 
-<p><br>[Generic function]<br><a class=none name='create-resource'><b>create-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<p><br>[Generic function]<br><a class=none name='create-resource'><b>create-resource</b> <i>resource request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function creates a new resource. </p>
+<p>Creates a new resource based on the request data. </p>
 
 </blockquote>
 
@@ -123,10 +123,10 @@ A basic example.
 
 <!-- Entry for CREATE-RESOURCE -->
 
-<p><br>[Method]<br><a class=none><b>create-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>create-resource</b> <i>(resource resource) request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Creates a new resource in the storage based on the request data. </p>
 
 </blockquote>
 
@@ -162,7 +162,7 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='delete-resource'><b>delete-resource</b> <i>resource</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function deletes an existing resource. </p>
+<p>Deletes an existing resource. </p>
 
 </blockquote>
 
@@ -174,7 +174,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>delete-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Deletes an existing resource. If the resource doesn't exist, an error was already thrown earlier thanks to load-resource. </p>
 
 </blockquote>
 
@@ -234,7 +234,7 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='has-permission'><b>has-permission</b> <i>resource method</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function determines if the request has permission to hit the resource. </p>
+<p>Determines if the request has permission to hit the resource. If it doesn't, returns NIL. </p>
 
 </blockquote>
 
@@ -246,7 +246,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>has-permission</b> <i>(resource resource) method</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Returns T. Override this method to change the behavior. </p>
 
 </blockquote>
 
@@ -258,7 +258,7 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='load-resource'><b>load-resource</b> <i>resource</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function loads a resource based on its identifier. </p>
+<p>Loads a resource based on its identifier. </p>
 
 </blockquote>
 
@@ -270,7 +270,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>load-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Loads the resource using its storage. A resource-not-found-error error is raised if the resource was not found. </p>
 
 </blockquote>
 
@@ -315,10 +315,10 @@ A basic example.
 
 <!-- Entry for PATCH-RESOURCE -->
 
-<p><br>[Generic function]<br><a class=none name='patch-resource'><b>patch-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<p><br>[Generic function]<br><a class=none name='patch-resource'><b>patch-resource</b> <i>resource request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function patches an existing resource. </p>
+<p>Patches an existing resource based on the request data. </p>
 
 </blockquote>
 
@@ -327,10 +327,10 @@ A basic example.
 
 <!-- Entry for PATCH-RESOURCE -->
 
-<p><br>[Method]<br><a class=none><b>patch-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>patch-resource</b> <i>(resource resource) request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Patches an existing resource based on the request data. </p>
 
 </blockquote>
 
@@ -351,10 +351,10 @@ A basic example.
 
 <!-- Entry for REPLACE-RESOURCE -->
 
-<p><br>[Generic function]<br><a class=none name='replace-resource'><b>replace-resource</b> <i>resource post-data</i> =&gt; <i>result</i></a>
+<p><br>[Generic function]<br><a class=none name='replace-resource'><b>replace-resource</b> <i>resource request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function replaces a resource. </p>
+<p>Replaces a resource based on the request data. </p>
 
 </blockquote>
 
@@ -363,10 +363,10 @@ A basic example.
 
 <!-- Entry for REPLACE-RESOURCE -->
 
-<p><br>[Method]<br><a class=none><b>replace-resource</b> <i>(resource resource) post-data</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>replace-resource</b> <i>(resource resource) request-data</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Replaces the resources based on the request data. </p>
 
 </blockquote>
 
@@ -393,7 +393,7 @@ A basic example.
 <p><br>[Standard class]<br><a class=none name='resource'><b>resource</b></a>
 <blockquote>
 
-
+<p>Base class for resources. All the resources should extend this class to have the default (required) slots: </p><ul><li><code>parent</code>: stores the parent of the resource in case of hierarchy. For example, if hitting foo/bar/baz/qux, the resource with identifier 'qux' will have 'bar' as parent. If there's no parent, it's value is NIL. </li><li><code>storage</code>: the storage object that satisfies the interface of the <code>restful:storage</code> class. </li></ul>
 
 </blockquote>
 
@@ -405,7 +405,9 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='resource-action'><b>resource-action</b> <i>resource</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function lets you handle actions on the resource. The :identifier slot lets you know which action is called. </p>
+<p>Lets you handle actions on the resource. The :identifier slot lets you know which action is called. This method is called for the POST requests, and routing should be handled by yourself. Here is a typical example of what it can look like: </p><pre><code>(defmethod resource-action ((res custom-resource))  
+  (cond ((string= (identifier res) "login") #'handle-login)  
+        (t (http-page-not-found)))) </code></pre>
 
 </blockquote>
 
@@ -417,7 +419,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>resource-action</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Returns a 404 Page Not Found. </p>
 
 </blockquote>
 
@@ -486,10 +488,10 @@ A basic example.
 
 <!-- Entry for STORAGE -->
 
-<p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>The hash table used to store the items in memory. </p>
+<p>automatically generated reader method </p>
 
 </blockquote>
 
@@ -510,10 +512,10 @@ A basic example.
 
 <!-- Entry for STORAGE -->
 
-<p><br>[Method]<br><a class=none><b>storage</b> <i>(object resource)</i> =&gt; <i>result</i></a>
+<p><br>[Method]<br><a class=none><b>storage</b> <i>(object memory-storage)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>automatically generated reader method </p>
+<p>The hash table used to store the items in memory. </p>
 
 </blockquote>
 
@@ -525,7 +527,7 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='view-collection'><b>view-collection</b> <i>collection</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function should return an object that will be serialized to json using the jonathan library. </p>
+<p>Returns an object that will be serialized to json using the jonathan library. </p>
 
 </blockquote>
 
@@ -537,7 +539,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>view-collection</b> <i>(collection collection)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Returns an object populated by the collection's storage. </p>
 
 </blockquote>
 
@@ -549,7 +551,7 @@ A basic example.
 <p><br>[Generic function]<br><a class=none name='view-resource'><b>view-resource</b> <i>resource</i> =&gt; <i>result</i></a>
 <blockquote>
 
-<p>This function should return an object that will be serialized to json using the jonathan library. </p>
+<p>Returns an object that will be serialized  to json using the jonathan library. </p>
 
 </blockquote>
 
@@ -561,7 +563,7 @@ A basic example.
 <p><br>[Method]<br><a class=none><b>view-resource</b> <i>(resource resource)</i> =&gt; <i>result</i></a>
 <blockquote>
 
-
+<p>Returns a plist representing the resource. </p>
 
 </blockquote>
 
