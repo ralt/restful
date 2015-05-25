@@ -5,6 +5,8 @@ JSON REST APIs made easy.
 In other words, spin up a fully standards-compliant<sup>1</sup> JSON API over HTTP
 in Common Lisp by providing a simple class.
 
+Not yet available on quicklisp.
+
 Documentation available [here][0].
 
 An example of an implementation is available [here][4].
