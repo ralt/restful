@@ -30,6 +30,7 @@ The following dependencies are used internally:
 
 - Add a :exclude option
 - Define a postgresql storage
+- Add POST handling on collections (create resources)
 
 
   [0]: http://rawgit.com/Ralt/restful/master/docs/api.html
